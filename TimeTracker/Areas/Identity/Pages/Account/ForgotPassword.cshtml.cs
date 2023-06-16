@@ -16,7 +16,8 @@ using Microsoft.AspNetCore.WebUtilities;
 
 namespace TimeTracker.Areas.Identity.Pages.Account
 {
-    public class ForgotPasswordModel : PageModel
+	[AllowAnonymous]
+	public class ForgotPasswordModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IEmailSender _emailSender;

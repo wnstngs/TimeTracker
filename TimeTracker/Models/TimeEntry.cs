@@ -11,13 +11,13 @@ public class TimeEntry
 
     public User User { get; set; }
 
-    public int Hours { get; set; }
+    public int HoursSpent { get; set; }
 
-    public int Minutes { get; set; }
+    public int MinutesSpent { get; set; }
 
-    public string? Comment { get; set; } = string.Empty;
+    public string? Comment { get; set; }
 
-    [Column(TypeName = "Date")] 
+    [Column(TypeName = "Date")]
     public DateTime Date { get; set; }
 
     [Column(TypeName = "Date")] 
@@ -32,8 +32,8 @@ public class TimeEntry
     {
         UserId = userId;
         User = default!;
-        Hours = hours;
-        Minutes = minutes;
+        HoursSpent = hours;
+        MinutesSpent = minutes;
         Comment = string.Empty;
         Date = date;
         Week = week;
@@ -49,8 +49,8 @@ public class TimeEntry
     {
         UserId = userId;
         User = default!;
-        Hours = hours;
-        Minutes = minutes;
+        HoursSpent = hours;
+        MinutesSpent = minutes;
         Comment = comment;
         Date = date;
         Week = week;

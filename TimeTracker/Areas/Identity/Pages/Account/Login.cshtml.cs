@@ -17,7 +17,8 @@ using Microsoft.Extensions.Logging;
 
 namespace TimeTracker.Areas.Identity.Pages.Account
 {
-    public class LoginModel : PageModel
+	[AllowAnonymous]
+	public class LoginModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
