@@ -24,12 +24,11 @@ public class TimeEntry
     public DateTime Week { get; set; }
 
     public TimeEntry(
-        int userId, 
+        int userId,
         int hours,
         int minutes,
-        DateTime date, 
-        DateTime week
-        )
+        DateTime date,
+        DateTime week)
     {
         UserId = userId;
         User = default!;
@@ -46,8 +45,7 @@ public class TimeEntry
         int minutes,
         string comment,
         DateTime date,
-        DateTime week
-        )
+        DateTime week)
     {
         UserId = userId;
         User = default!;
