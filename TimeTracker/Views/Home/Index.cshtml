@@ -20,13 +20,9 @@
 				<i class="bi bi-arrow-right text-dark"></i>
 			</button>
 		</div>
-		<button type="button" class="btn btn-light btn-sm">
+		<button type="button" class="btn btn-primary btn-sm">
 			Complete Week
 		</button>
-		@if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
-		{
-			<p>Tesssst</p>
-		}
 	</div>
 	<div class="row">
 		<div class="col">
