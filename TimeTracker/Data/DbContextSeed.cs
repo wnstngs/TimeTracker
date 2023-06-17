@@ -24,7 +24,10 @@ public static class DbContextSeed
 		var alreadyExists = await roleManager
 			.RoleExistsAsync(Roles.Admin);
 
-		if (alreadyExists) return;
+		if (alreadyExists)
+		{
+			return;
+		}
 
 		await roleManager.CreateAsync(
 			new IdentityRole(Roles.Admin));
@@ -37,7 +40,10 @@ public static class DbContextSeed
 			.Where(x => x.UserName == TestIdentity.AdminUserName)
 			.SingleOrDefaultAsync();
 
-		if (testAdmin != null) return;
+		if (testAdmin != null)
+		{
+			return;
+		}
 
 		testAdmin = new ApplicationUser
 		{
@@ -45,8 +51,10 @@ public static class DbContextSeed
 			Email = TestIdentity.AdminEmail
 		};
 		await userManager.CreateAsync(
-			testAdmin, TestIdentity.AdminPassword);
+			testAdmin, 
+			TestIdentity.AdminPassword);
 		await userManager.AddToRoleAsync(
-			testAdmin, Roles.Admin);
+			testAdmin,
+			Roles.Admin);
 	}
 }

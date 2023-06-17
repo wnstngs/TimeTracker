@@ -17,7 +17,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 	options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+		options.SignIn.RequireConfirmedAccount = false
+	)
 	.AddRoles<IdentityRole>()
 	.AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
@@ -28,9 +30,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddAuthorization(options =>
 {
 	options.AddPolicy("RequireAdministratorRole",
-		policy => policy.RequireRole("Administrator"));
-
-		options.FallbackPolicy = new AuthorizationPolicyBuilder()
+		policy => policy.RequireRole(Roles.Admin));
+	
+	options.FallbackPolicy = new AuthorizationPolicyBuilder()
 		.RequireAuthenticatedUser()
 		.Build();
 });
@@ -93,8 +95,7 @@ using (var scope = app.Services.CreateScope())
 	}
 	catch (Exception ex)
 	{
-		var logger = services
-			.GetRequiredService<ILogger<Program>>();
+		var logger = services.GetRequiredService<ILogger<Program>>();
 		logger.LogError(ex, "Error occurred seeding the DB.");
 	}
 }
