@@ -2,7 +2,7 @@
 
 public class ManageUsersViewModel
 {
-	public ApplicationUser[] Admins { get; set; }
+    public ApplicationUser[] Admins { get; set; }
 
-	public ApplicationUser[] Everyone { get; set; }
+    public ApplicationUser[] Everyone { get; set; }
 }

@@ -15,9 +15,7 @@ public class TimeEntry
 
     public string? Comment { get; set; }
 
-    [Column(TypeName = "Date")]
-    public DateTime Date { get; set; }
+    [Column(TypeName = "Date")] public DateTime Date { get; set; }
 
-    [Column(TypeName = "Date")] 
-    public DateTime Week { get; set; }
+    [Column(TypeName = "Date")] public DateTime Week { get; set; }
 }

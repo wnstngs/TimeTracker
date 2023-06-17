@@ -6,33 +6,33 @@ using TimeTracker.Models;
 
 namespace TimeTracker.Controllers
 {
-	[Authorize(Roles = "Admin")]
-	public class ManageUsersController : Controller
-	{
-		private readonly UserManager<ApplicationUser> _userManager;
+    [Authorize(Roles = "Admin")]
+    public class ManageUsersController : Controller
+    {
+        private readonly UserManager<ApplicationUser> _userManager;
 
-		public ManageUsersController(
-			UserManager<ApplicationUser> userManager)
-		{
-			_userManager = userManager;
-		}
+        public ManageUsersController(
+            UserManager<ApplicationUser> userManager)
+        {
+            _userManager = userManager;
+        }
 
-		public async Task<IActionResult> Index()
-		{
-			var admins = (
-					await _userManager.GetUsersInRoleAsync(Roles.Admin))
-				.ToArray();
+        public async Task<IActionResult> Index()
+        {
+            var admins = (
+                    await _userManager.GetUsersInRoleAsync(Roles.Admin))
+                .ToArray();
 
-			var everyone = await _userManager.Users
-				.ToArrayAsync();
+            var everyone = await _userManager.Users
+                .ToArrayAsync();
 
-			var model = new ManageUsersViewModel
-			{
-				Admins = admins,
-				Everyone = everyone
-			};
+            var model = new ManageUsersViewModel
+            {
+                Admins = admins,
+                Everyone = everyone
+            };
 
-			return View(model);
-		}
-	}
+            return View(model);
+        }
+    }
 }

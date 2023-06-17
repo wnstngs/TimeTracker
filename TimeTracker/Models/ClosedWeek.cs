@@ -11,8 +11,7 @@ public class ClosedWeek
 
     public ApplicationUser ApplicationUser { get; set; }
 
-    [Column(TypeName = "Date")]
-    public DateTime Week { get; set; }
+    [Column(TypeName = "Date")] public DateTime Week { get; set; }
 
     public ClosedWeek(int userId, DateTime week)
     {
