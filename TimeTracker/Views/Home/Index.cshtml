@@ -1,8 +1,132 @@
-﻿@{
-    ViewData["Title"] = "Time Tracker";
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
+@{
+	ViewData["Title"] = "Time Tracker";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container-fluid">
+	<div class="d-flex justify-content-between pb-3">
+		<h4 class="fw-bold">
+		</h4>
+		<div class="hstack">
+			<button type="button" class="btn btn-light btn-sm me-2">
+				<i class="bi bi-arrow-left text-dark"></i>
+			</button>
+			<h4 class="fw-bold">
+				Week 1
+			</h4>
+			<button type="button" class="btn btn-light btn-sm ms-2">
+				<i class="bi bi-arrow-right text-dark"></i>
+			</button>
+		</div>
+		<button type="button" class="btn btn-light btn-sm">
+			Complete Week
+		</button>
+		@if ((await AuthorizationService.AuthorizeAsync(User, "RequireAdministratorRole")).Succeeded)
+		{
+			<p>Test</p>
+		}
+	</div>
+	<div class="row">
+		<div class="col">
+			<div class="row">
+				<h5 class="text-center fw-bolder">
+					Mon
+				</h5>
+			</div>
+			<div class="row overflow-auto">
+				<ul>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+					<li>1</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col">
+			<div class="row">
+				<h5 class="text-center fw-bolder">
+					Tue
+				</h5>
+			</div>
+			<div class="row overflow-auto">...</div>
+		</div>
+		<div class="col">
+			<div class="row">
+				<h5 class="text-center fw-bolder">
+					Wed
+				</h5>
+			</div>
+			<div class="row overflow-auto">...</div>
+		</div>
+		<div class="col">
+			<div class="row">
+				<h5 class="text-center fw-bolder">
+					Thu
+				</h5>
+			</div>
+			<div class="row overflow-auto">...</div>
+		</div>
+		<div class="col">
+			<div class="row">
+				<h5 class="text-center fw-bolder">
+					Fri
+				</h5>
+			</div>
+			<div class="row overflow-auto">...</div>
+		</div>
+	</div>
 </div>

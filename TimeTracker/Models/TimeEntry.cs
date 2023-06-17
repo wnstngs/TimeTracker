@@ -9,8 +9,6 @@ public class TimeEntry
 
     public int UserId { get; set; }
 
-    public User User { get; set; }
-
     public int HoursSpent { get; set; }
 
     public int MinutesSpent { get; set; }
@@ -22,37 +20,4 @@ public class TimeEntry
 
     [Column(TypeName = "Date")] 
     public DateTime Week { get; set; }
-
-    public TimeEntry(
-        int userId,
-        int hours,
-        int minutes,
-        DateTime date,
-        DateTime week)
-    {
-        UserId = userId;
-        User = default!;
-        HoursSpent = hours;
-        MinutesSpent = minutes;
-        Comment = string.Empty;
-        Date = date;
-        Week = week;
-    }
-
-    public TimeEntry(
-        int userId, 
-        int hours,
-        int minutes,
-        string comment,
-        DateTime date,
-        DateTime week)
-    {
-        UserId = userId;
-        User = default!;
-        HoursSpent = hours;
-        MinutesSpent = minutes;
-        Comment = comment;
-        Date = date;
-        Week = week;
-    }
 }

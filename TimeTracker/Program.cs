@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using System;
 using TimeTracker.Data;
+using TimeTracker.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +27,10 @@ builder.Services.AddControllersWithViews();
 //
 builder.Services.AddAuthorization(options =>
 {
-	options.FallbackPolicy = new AuthorizationPolicyBuilder()
+	options.AddPolicy("RequireAdministratorRole",
+		policy => policy.RequireRole("Administrator"));
+
+		options.FallbackPolicy = new AuthorizationPolicyBuilder()
 		.RequireAuthenticatedUser()
 		.Build();
 });
@@ -74,6 +79,25 @@ builder.Services.ConfigureApplicationCookie(options =>
 });
 
 var app = builder.Build();
+
+//
+// Seed the DB.
+//
+using (var scope = app.Services.CreateScope())
+{
+	var services = scope.ServiceProvider;
+
+	try
+	{
+		DbContextSeed.InitializeAsync(services).Wait();
+	}
+	catch (Exception ex)
+	{
+		var logger = services
+			.GetRequiredService<ILogger<Program>>();
+		logger.LogError(ex, "Error occurred seeding the DB.");
+	}
+}
 
 //
 // Configure the HTTP request pipeline.

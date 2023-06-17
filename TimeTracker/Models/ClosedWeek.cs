@@ -9,7 +9,7 @@ public class ClosedWeek
 
     public int UserId { get; set; }
 
-    public User User { get; set; }
+    public ApplicationUser ApplicationUser { get; set; }
 
     [Column(TypeName = "Date")]
     public DateTime Week { get; set; }
@@ -17,7 +17,7 @@ public class ClosedWeek
     public ClosedWeek(int userId, DateTime week)
     {
         UserId = userId;
-        User = default!;
+        ApplicationUser = default!;
         Week = week;
     }
 }
