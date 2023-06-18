@@ -1,0 +1,39 @@
+﻿@model CreateUserViewModel
+
+<div class="modal fade" id="createUserModal" tabindex="-1" aria-labelledby="createUserModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="createUserModalLabel">Create new user</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<form action="@Url.Action("Create", "Users")" method="post">
+			<div class="modal-body">
+				<div class="form-floating mb-3">
+					<input asp-for="Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com"/>
+					<label asp-for="Email">Email</label>
+					<span asp-validation-for="Email" class="text-danger"></span>
+				</div>
+				<div class="form-floating mb-3">
+					<input asp-for="Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password"/>
+					<label asp-for="Password">Password</label>
+					<span asp-validation-for="Password" class="text-danger"></span>
+				</div>
+				<div class="form-floating mb-3">
+					<input asp-for="ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password"/>
+					<label asp-for="ConfirmPassword">Confirm Password</label>
+					<span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+				<button type="submit" class="btn btn-primary">Create</button>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
