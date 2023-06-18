@@ -57,15 +57,31 @@ namespace TimeTracker.Controllers
 		        UserName = user.Email,
 		        Email = user.Email
 	        };
+
 	        await _userManager.CreateAsync(newUser, user.Password);
 	        await _userManager.AddToRoleAsync(newUser, Roles.User);
 
-	        return View("Index");
+	        return RedirectToAction("Index");
         }
 
-		public void DeleteUser()
+        [HttpPost]
+		public async Task<IActionResult> Delete(string id)
         {
+	        var userToDelete = await _userManager.Users
+		        .Where(x => x.Id == id)
+		        .SingleOrDefaultAsync();
 
-        }
+	        if (userToDelete == null)
+	        {
+				//
+				// There is no user with that Id.
+				//
+				return BadRequest();
+	        }
+
+            await _userManager.DeleteAsync(userToDelete);
+
+            return RedirectToAction("Index");
+		}
     }
 }

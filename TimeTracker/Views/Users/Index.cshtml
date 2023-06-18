@@ -28,7 +28,8 @@
 			<td>@user.UserEmail</td>
 			<td>@user.UserRoles</td>
 			<td>
-				<button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteUserModal">
+				<button class="btn btn-danger btn-sm" data-bs-toggle="modal" 
+				        data-bs-target="#deleteUserModal" data-bs-id="@user.UserId">
 					Delete
 				</button>
 			</td>
@@ -36,27 +37,6 @@
 	}
 </table>
 
-
 @await Html.PartialAsync("Create", new CreateUserViewModel())
 
-<div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="deleteUserModalLabel">Delete user</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				Do you want to delete user?
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-				<button type="button" class="btn btn-danger">Delete</button>
-			</div>
-		</div>
-	</div>
-</div>
-
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+@await Html.PartialAsync("Delete")
