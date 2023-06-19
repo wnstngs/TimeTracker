@@ -1,10 +1,13 @@
+using System.Reflection;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
-using System;
 using TimeTracker.Data;
 using TimeTracker.Models;
+using TimeTracker.Models.Mapping;
+using TimeTracker.Services;
+using TimeTracker.Services.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -79,6 +82,33 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.AccessDeniedPath = "/Identity/Account/AccessDenied";
     options.SlidingExpiration = true;
 });
+
+//
+// Services.
+//
+builder.Services.AddScoped<IClosedWeekService, ClosedWeekService>();
+builder.Services.AddScoped<ITimeEntryService, TimeEntryService>();
+
+//
+// AutoMapper.
+//
+var projectMappings =
+	typeof(IViewModelMapping).GetTypeInfo().Assembly.GetExportedTypes()
+		.Where(x => !x.GetTypeInfo().IsAbstract && typeof(IViewModelMapping).IsAssignableFrom(x))
+		.Select(Activator.CreateInstance)
+		.Cast<IViewModelMapping>();
+var config = new MapperConfiguration(cfg =>
+{
+	cfg.ConstructServicesUsing(type => ActivatorUtilities.CreateInstance(
+		builder.Services.BuildServiceProvider(),
+		type));
+	foreach (var m in projectMappings)
+	{
+		m.Create(cfg);
+	}
+});
+
+builder.Services.AddTransient(s => config.CreateMapper());
 
 var app = builder.Build();
 

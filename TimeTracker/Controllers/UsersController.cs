@@ -11,8 +11,7 @@ namespace TimeTracker.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public UsersController(
-            UserManager<ApplicationUser> userManager)
+        public UsersController(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
         }

@@ -5,17 +5,19 @@ namespace TimeTracker.Models;
 
 public class TimeEntry
 {
-    public int Id { get; set; }
+	public int Id { get; set; }
 
-    public int UserId { get; set; }
+	public string? UserId { get; set; }
 
-    public int HoursSpent { get; set; }
+	public ApplicationUser User { get; set; }
 
-    public int MinutesSpent { get; set; }
+	public int HoursSpent { get; set; }
 
-    public string? Comment { get; set; }
+	public int MinutesSpent { get; set; }
 
-    [Column(TypeName = "Date")] public DateTime Date { get; set; }
+	public string? Comment { get; set; }
 
-    [Column(TypeName = "Date")] public DateTime Week { get; set; }
+	[Column(TypeName = "Date")] public DateTime Date { get; set; }
+
+	[Column(TypeName = "Date")] public DateTime Week { get; set; }
 }

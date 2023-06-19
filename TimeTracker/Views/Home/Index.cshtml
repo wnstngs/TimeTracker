@@ -1,8 +1,20 @@
 ﻿@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Identity
+@model TimeEntriesListViewModel
 @inject IAuthorizationService AuthorizationService
+@inject UserManager<ApplicationUser> userManager
 
 @{
 	ViewData["Title"] = "Time Tracker";
+
+	var currentUser = await userManager.GetUserAsync(User);
+	var isAdmin = currentUser != null
+	              && await userManager.IsInRoleAsync(currentUser, Roles.Admin);
+
+	// Date for Monday of the selected week.
+	var weekMonday = Model.Week;
+	// Date for Friday (Monday + 4 days) of the selected week.
+	var weekFriday = Model.Week.AddDays(4);
 }
 
 <div class="container-fluid">
@@ -10,19 +22,38 @@
 		<h4 class="fw-bold">
 		</h4>
 		<div class="hstack">
-			<button type="button" class="btn btn-light btn-sm me-2">
-				<i class="bi bi-arrow-left text-dark"></i>
-			</button>
+			<form action="@Url.Action("Index", "Home")" method="get">
+				<button type="submit" class="btn btn-light btn-sm ms-2">
+					<i class="bi bi-arrow-left text-dark"></i>
+				</button>
+			</form>
 			<h4 class="fw-bold">
-				Week 1
+				@weekMonday.Day/@weekMonday.Month/@weekMonday.Year — @weekFriday.Day/@weekFriday.Month/@weekFriday.Year
 			</h4>
-			<button type="button" class="btn btn-light btn-sm ms-2">
-				<i class="bi bi-arrow-right text-dark"></i>
-			</button>
+			@if (Model.Week != Model.CurrentWeek)
+			{
+				<form action="@Url.Action("Index", "Home")" method="get">
+					<button type="submit" class="btn btn-light btn-sm ms-2">
+						<i class="bi bi-arrow-right text-dark"></i>
+					</button>
+				</form>
+			}
 		</div>
-		<button type="button" class="btn btn-primary btn-sm">
-			Complete Week
-		</button>
+		<div class="hstack">
+			@if (isAdmin && Model.IsWeekClosed)
+			{
+				<button type="button" class="btn btn-primary btn-sm">
+					Open Week
+				</button>
+			}
+			@if (Model.Week == Model.CurrentWeek &&
+			     !Model.IsWeekClosed)
+			{
+				<button type="button" class="btn btn-primary btn-sm">
+					Complete Week
+				</button>
+			}
+		</div>
 	</div>
 	<div class="row">
 		<div class="col">
@@ -32,64 +63,7 @@
 				</h5>
 			</div>
 			<div class="row overflow-auto">
-				<ul>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-					<li>1</li>
-				</ul>
+				...
 			</div>
 		</div>
 		<div class="col">
