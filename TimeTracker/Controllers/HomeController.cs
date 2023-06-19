@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Globalization;
 using AutoMapper;
 using TimeTracker.Models;
 using TimeTracker.Services.Contracts;
@@ -30,10 +31,30 @@ namespace TimeTracker.Controllers
 			_timeEntryService = timeEntryService;
 		}
 
-		public async Task<IActionResult> Index(DateTime? weekDate, string? userId)
+		public async Task<IActionResult> Index(string? weekDate, string? userId)
 		{
+			DateTime? parsedWeekDate;
+			if (weekDate != null)
+			{
+				try
+				{
+					parsedWeekDate = DateTime.ParseExact(
+						weekDate,
+						Common.Constants.DateTimeFormatForWeeks,
+						CultureInfo.InvariantCulture);
+				}
+				catch
+				{
+					parsedWeekDate = null;
+				}
+			}
+			else
+			{
+				parsedWeekDate = null;
+			}
+
 			var selectedUserId = await EnsureSelectedUserId(userId);
-			var week = weekDate ?? GetCurrentWeek();
+			var week = parsedWeekDate ?? GetCurrentWeek();
 			var prevWeek = week.AddDays(-7);
 			var nextWeek = week.AddDays(7);
 
@@ -102,8 +123,8 @@ namespace TimeTracker.Controllers
 
 		private DateTime GetCurrentWeek()
 		{
-			DateTime today = DateTime.Today;
-			DateTime monday = today.AddDays(-(today.DayOfWeek != (int)DayOfWeek.Sunday ? (int)today.DayOfWeek : 7) + (int)DayOfWeek.Monday);
+			var today = DateTime.Today;
+			var monday = today.AddDays(-(today.DayOfWeek != (int)DayOfWeek.Sunday ? (int)today.DayOfWeek : 7) + (int)DayOfWeek.Monday);
 			return monday;
 		}
 

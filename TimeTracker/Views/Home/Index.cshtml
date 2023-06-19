@@ -11,10 +11,14 @@
 	var isAdmin = currentUser != null
 	              && await userManager.IsInRoleAsync(currentUser, Roles.Admin);
 
-	// Date for Monday of the selected week.
+	// Date for Monday of the current week.
 	var weekMonday = Model.Week;
-	// Date for Friday (Monday + 4 days) of the selected week.
+	// Date for Friday (Monday + 4 days) of the current week.
 	var weekFriday = Model.Week.AddDays(4);
+	// Date for Monday of the previous week.
+	var previousWeekMonday = weekMonday.AddDays(-7);
+	// Date for Monday of the next week.
+	var nextWeekMonday = weekMonday.AddDays(7);
 }
 
 <div class="container-fluid">
@@ -22,21 +26,27 @@
 		<h4 class="fw-bold">
 		</h4>
 		<div class="hstack">
-			<form action="@Url.Action("Index", "Home")" method="get">
-				<button type="submit" class="btn btn-light btn-sm ms-2">
-					<i class="bi bi-arrow-left text-dark"></i>
-				</button>
-			</form>
+			<a href="@Url.Action("Index", "Home", 
+				         new 
+				         {
+					         weekDate = previousWeekMonday.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)
+				         })"
+			   class="btn btn-light btn-sm me-2">
+				<i class="bi bi-arrow-left text-dark"></i>
+			</a>
 			<h4 class="fw-bold">
 				@weekMonday.Day/@weekMonday.Month/@weekMonday.Year — @weekFriday.Day/@weekFriday.Month/@weekFriday.Year
 			</h4>
 			@if (Model.Week != Model.CurrentWeek)
 			{
-				<form action="@Url.Action("Index", "Home")" method="get">
-					<button type="submit" class="btn btn-light btn-sm ms-2">
-						<i class="bi bi-arrow-right text-dark"></i>
-					</button>
-				</form>
+				<a href="@Url.Action("Index", "Home", 
+					         new 
+					         {
+						         weekDate = nextWeekMonday.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)
+					         })"
+				   class="btn btn-light btn-sm ms-2">
+					<i class="bi bi-arrow-right text-dark"></i>
+				</a>
 			}
 		</div>
 		<div class="hstack">
