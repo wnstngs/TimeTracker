@@ -38,10 +38,25 @@ namespace TimeTracker.Controllers
 			{
 				try
 				{
-					parsedWeekDate = DateTime.ParseExact(
+					//
+					// Check if the passed weekDate is Monday.
+					// If it is not show current week.
+					//
+					var probe = DateTime.ParseExact(
 						weekDate,
 						Common.Constants.DateTimeFormatForWeeks,
 						CultureInfo.InvariantCulture);
+					if (probe.DayOfWeek != DayOfWeek.Monday)
+					{
+						parsedWeekDate = null;
+					}
+					else
+					{
+						parsedWeekDate = DateTime.ParseExact(
+							weekDate,
+							Common.Constants.DateTimeFormatForWeeks,
+							CultureInfo.InvariantCulture);
+					}
 				}
 				catch
 				{
