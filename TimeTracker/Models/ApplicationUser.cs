@@ -2,7 +2,7 @@
 
 namespace TimeTracker.Models;
 
-public class ApplicationUser : IdentityUser
+public class ApplicationUser : IdentityUser<int>
 {
     public ApplicationUser()
     {

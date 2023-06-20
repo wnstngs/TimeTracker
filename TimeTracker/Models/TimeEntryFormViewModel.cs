@@ -6,7 +6,7 @@ public class TimeEntryFormViewModel
 {
 	public int Id { get; set; }
 
-	public string? UserId { get; set; }
+	public int? UserId { get; set; }
 
 	[Required]
 	[Range(0, 23)]
@@ -19,10 +19,8 @@ public class TimeEntryFormViewModel
 	[Required]
 	public string? Comment { get; set; } = default!;
 
-	[Required] 
 	public DateTime Date { get; set; }
 
-	[Required] 
 	public DateTime Week { get; set; }
 
 	public TimeEntryFormViewModel()

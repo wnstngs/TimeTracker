@@ -56,35 +56,42 @@
 <div class="row">
 	<div class="col-sm">
 		<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
-		        data-bs-target="#createTimeEntryModal">
+		        data-bs-target="#createTimeEntryModal"
+		        data-bs-date="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
+		        data-bs-week="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)">
 			<span class="bi bi-plus-lg"></span>
 			&nbsp;@Model.Week.DayOfWeek (@Model.Week.Day)
 		</button>
 	</div>
 	<div class="col-sm">
 		<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
-		        data-bs-target="#createTimeEntryModal">
+		        data-bs-target="#createTimeEntryModal"
+		        data-bs-date="@Model.Week.AddDays(1).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
+		        data-bs-week="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)">
 			<span class="bi bi-plus-lg"></span>
 			&nbsp;@Model.Week.AddDays(1).DayOfWeek (@Model.Week.AddDays(1).Day)
 		</button>
 	</div>
 	<div class="col-sm">
 		<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
-		        data-bs-target="#createTimeEntryModal">
+		        data-bs-target="#createTimeEntryModal" data-bs-date="@Model.Week.AddDays(2).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
+		        data-bs-week="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)">
 			<span class="bi bi-plus-lg"></span>
 			&nbsp;@Model.Week.AddDays(2).DayOfWeek (@Model.Week.AddDays(2).Day)
 		</button>
 	</div>
 	<div class="col-sm">
 		<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
-		        data-bs-target="#createTimeEntryModal">
+		        data-bs-target="#createTimeEntryModal" data-bs-date="@Model.Week.AddDays(3).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
+		        data-bs-week="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)">
 			<span class="bi bi-plus-lg"></span>
 			&nbsp;@Model.Week.AddDays(3).DayOfWeek (@Model.Week.AddDays(3).Day)
 		</button>
 	</div>
 	<div class="col-sm">
 		<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
-		        data-bs-target="#createTimeEntryModal">
+		        data-bs-target="#createTimeEntryModal" data-bs-date="@Model.Week.AddDays(4).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
+		        data-bs-week="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)">
 			<span class="bi bi-plus-lg"></span>
 			&nbsp;@Model.Week.AddDays(4).DayOfWeek (@Model.Week.AddDays(4).Day)
 		</button>
@@ -101,15 +108,18 @@
 						<div class="card">
 							<div class="card-header">
 								<p class="card-text">
-									@timeEntry.Comment
+									@timeEntry.HoursSpent h @timeEntry.MinutesSpent min
 								</p>
 							</div>
 							<div class="card-body">
 								<p class="card-text">
-									@timeEntry.HoursSpent h @timeEntry.MinutesSpent min
+									@timeEntry.Comment
 								</p>
 								<a href="#" class="btn btn-primary btn-sm">Edit</a>
-								<a href="#" class="btn btn-danger btn-sm">Delete</a>
+								<a class="btn btn-danger btn-sm" data-bs-toggle="modal"
+								   data-bs-target="#deleteTimeEntryModal" data-bs-id="@timeEntry.Id">
+									Delete
+								</a>
 							</div>
 						</div>
 					</li>
@@ -127,15 +137,18 @@
 						<div class="card">
 							<div class="card-header">
 								<p class="card-text">
-									@timeEntry.Comment
+									@timeEntry.HoursSpent h @timeEntry.MinutesSpent min
 								</p>
 							</div>
 							<div class="card-body">
 								<p class="card-text">
-									@timeEntry.HoursSpent h @timeEntry.MinutesSpent min
+									@timeEntry.Comment
 								</p>
 								<a href="#" class="btn btn-primary btn-sm">Edit</a>
-								<a href="#" class="btn btn-danger btn-sm">Delete</a>
+								<a class="btn btn-danger btn-sm" data-bs-toggle="modal"
+								   data-bs-target="#deleteTimeEntryModal" data-bs-id="@timeEntry.Id">
+									Delete
+								</a>
 							</div>
 						</div>
 					</li>
@@ -153,15 +166,18 @@
 						<div class="card">
 							<div class="card-header">
 								<p class="card-text">
-									@timeEntry.Comment
+									@timeEntry.HoursSpent h @timeEntry.MinutesSpent min
 								</p>
 							</div>
 							<div class="card-body">
 								<p class="card-text">
-									@timeEntry.HoursSpent h @timeEntry.MinutesSpent min
+									@timeEntry.Comment
 								</p>
 								<a href="#" class="btn btn-primary btn-sm">Edit</a>
-								<a href="#" class="btn btn-danger btn-sm">Delete</a>
+								<a class="btn btn-danger btn-sm" data-bs-toggle="modal"
+								   data-bs-target="#deleteTimeEntryModal" data-bs-id="@timeEntry.Id">
+									Delete
+								</a>
 							</div>
 						</div>
 					</li>
@@ -179,15 +195,18 @@
 						<div class="card">
 							<div class="card-header">
 								<p class="card-text">
-									@timeEntry.Comment
+									@timeEntry.HoursSpent h @timeEntry.MinutesSpent min
 								</p>
 							</div>
 							<div class="card-body">
 								<p class="card-text">
-									@timeEntry.HoursSpent h @timeEntry.MinutesSpent min
+									@timeEntry.Comment
 								</p>
 								<a href="#" class="btn btn-primary btn-sm">Edit</a>
-								<a href="#" class="btn btn-danger btn-sm">Delete</a>
+								<a class="btn btn-danger btn-sm" data-bs-toggle="modal"
+								   data-bs-target="#deleteTimeEntryModal" data-bs-id="@timeEntry.Id">
+									Delete
+								</a>
 							</div>
 						</div>
 					</li>
@@ -205,15 +224,18 @@
 						<div class="card">
 							<div class="card-header">
 								<p class="card-text">
-									@timeEntry.Comment
+									@timeEntry.HoursSpent h @timeEntry.MinutesSpent min
 								</p>
 							</div>
 							<div class="card-body">
 								<p class="card-text">
-									@timeEntry.HoursSpent h @timeEntry.MinutesSpent min
+									@timeEntry.Comment
 								</p>
 								<a href="#" class="btn btn-primary btn-sm">Edit</a>
-								<a href="#" class="btn btn-danger btn-sm">Delete</a>
+								<a class="btn btn-danger btn-sm" data-bs-toggle="modal"
+								   data-bs-target="#deleteTimeEntryModal" data-bs-id="@timeEntry.Id">
+									Delete
+								</a>
 							</div>
 						</div>
 					</li>
@@ -224,3 +246,4 @@
 </div>
 
 @await Html.PartialAsync("Create", new TimeEntryFormViewModel())
+@await Html.PartialAsync("Delete")

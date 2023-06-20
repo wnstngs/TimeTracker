@@ -34,10 +34,10 @@ namespace TimeTracker.Controllers
         {
 	        if (!ModelState.IsValid)
 	        {
-		        return BadRequest();
+		        return BadRequest("The user creation form failed to pass validation!");
 	        }
 
-	        var newUser = await _userManager.Users
+			var newUser = await _userManager.Users
 		        .Where(x => x.UserName == user.Email)
 		        .SingleOrDefaultAsync();
 	        if (newUser != null)
@@ -45,7 +45,7 @@ namespace TimeTracker.Controllers
                 //
                 // There is already a user with that UserName and Email.
                 //
-		        return BadRequest();
+		        return BadRequest("There is already a user with that UserName and Email.");
 	        }
 
 	        newUser = new ApplicationUser
@@ -64,7 +64,7 @@ namespace TimeTracker.Controllers
         }
 
         [HttpPost]
-		public async Task<IActionResult> Delete(string id)
+		public async Task<IActionResult> Delete(int id)
         {
 	        var userToDelete = await _userManager.Users
 		        .Where(x => x.Id == id)
@@ -75,7 +75,7 @@ namespace TimeTracker.Controllers
 				//
 				// There is no user with that Id.
 				//
-				return BadRequest();
+				return BadRequest("There is no user with that Id.");
 	        }
 
             await _userManager.DeleteAsync(userToDelete);

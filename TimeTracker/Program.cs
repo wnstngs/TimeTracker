@@ -1,11 +1,8 @@
-using System.Reflection;
-using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TimeTracker.Data;
 using TimeTracker.Models;
-using TimeTracker.Models.Mapping;
 using TimeTracker.Services;
 using TimeTracker.Services.Contracts;
 
@@ -23,7 +20,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 		options.SignIn.RequireConfirmedAccount = false
 	)
-	.AddRoles<IdentityRole>()
+	.AddRoles<ApplicationRole>()
 	.AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
@@ -88,27 +85,6 @@ builder.Services.ConfigureApplicationCookie(options =>
 //
 builder.Services.AddScoped<IClosedWeekService, ClosedWeekService>();
 builder.Services.AddScoped<ITimeEntryService, TimeEntryService>();
-
-//
-// AutoMapper.
-//
-var projectMappings =
-	typeof(IViewModelMapping).GetTypeInfo().Assembly.GetExportedTypes()
-		.Where(x => !x.GetTypeInfo().IsAbstract && typeof(IViewModelMapping).IsAssignableFrom(x))
-		.Select(Activator.CreateInstance)
-		.Cast<IViewModelMapping>();
-var config = new MapperConfiguration(cfg =>
-{
-	cfg.ConstructServicesUsing(type => ActivatorUtilities.CreateInstance(
-		builder.Services.BuildServiceProvider(),
-		type));
-	foreach (var m in projectMappings)
-	{
-		m.Create(cfg);
-	}
-});
-
-builder.Services.AddTransient(s => config.CreateMapper());
 
 var app = builder.Build();
 

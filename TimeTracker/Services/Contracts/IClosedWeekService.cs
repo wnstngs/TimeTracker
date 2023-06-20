@@ -5,5 +5,5 @@ namespace TimeTracker.Services.Contracts;
 
 public interface IClosedWeekService : IBaseService<ClosedWeek>
 {
-	bool IsWeekClosed(string? userId, DateTime week);
+	bool IsWeekClosed(int userId, DateTime week);
 }

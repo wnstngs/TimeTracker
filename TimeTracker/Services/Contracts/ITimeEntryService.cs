@@ -5,7 +5,7 @@ namespace TimeTracker.Services.Contracts;
 
 public interface ITimeEntryService : IBaseService<TimeEntry>
 {
-	List<TimeEntry> GetAllByUserAndWeek(string userId, DateTime week);
+	List<TimeEntry> GetAllByUserAndWeek(int userId, DateTime week);
 
 	IQueryable<TimeEntry> GetManyByYearAndMonth(int year, int month);
 }

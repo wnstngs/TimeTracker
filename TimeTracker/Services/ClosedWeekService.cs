@@ -11,7 +11,7 @@ public class ClosedWeekService : BaseService<ClosedWeek>, IClosedWeekService
 	{
 	}
 
-	public bool IsWeekClosed(string userId, DateTime weekDate)
+	public bool IsWeekClosed(int userId, DateTime weekDate)
 	{
 		return dataContext.ClosedWeeks
 			.Where(t => t.Week == weekDate)

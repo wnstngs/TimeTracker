@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
-    <Folder Include="Models\Mapping\" />
     <Folder Include="Common\" />
     <Folder Include="Services\Contracts\" />
     <Folder Include="Services\Base\" />

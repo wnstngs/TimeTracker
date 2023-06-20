@@ -62,18 +62,13 @@ public abstract class BaseService<T> where T : class
 
 	public virtual T FindById(int id, bool asNoTracking = false)
 	{
-		var entity = dbSet.Find(id);
-
-		if (entity == null)
-		{
-			throw new ArgumentException(
+		var entity = dbSet.Find(id) ?? throw new ArgumentException(
 				$"The entity with id {id} of type {typeof(T)} is not found"
 			);
-		}
-
 		if (asNoTracking)
+		{
 			dataContext.Entry(entity).State = EntityState.Detached;
-
+		}
 		return entity;
 	}
 

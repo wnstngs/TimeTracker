@@ -12,7 +12,7 @@ public class TimeEntryService : BaseService<TimeEntry>, ITimeEntryService
 	{
 	}
 
-	public List<TimeEntry> GetAllByUserAndWeek(string userId, DateTime week)
+	public List<TimeEntry> GetAllByUserAndWeek(int userId, DateTime week)
 	{
 		return dataContext.TimeEntries
 			.Where(t => t.UserId == userId && t.Week == week)

@@ -6,17 +6,17 @@ public class TimeEntryViewModel
 {
 	public int Id { get; set; }
 
-	public string? UserId { get; set; }
+	public int UserId { get; set; }
 
-	[Required] public int HoursSpent { get; set; }
+	public int HoursSpent { get; set; }
 
-	[Required] public int MinutesSpent { get; set; }
+	public int MinutesSpent { get; set; }
 
-	[Required] public string? Comment { get; set; } = default!;
+	public string? Comment { get; set; } = default!;
 
-	[Required] public DateTime Date { get; set; }
+	public DateTime Date { get; set; }
 
-	[Required] public DateTime Week { get; set; }
+	public DateTime Week { get; set; }
 
 	public TimeEntryViewModel()
 	{

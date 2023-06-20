@@ -6,32 +6,30 @@ using AutoMapper;
 using TimeTracker.Models;
 using TimeTracker.Services.Contracts;
 using TimeTracker.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace TimeTracker.Controllers
 {
 	public class HomeController : Controller
 	{
-		private readonly IMapper _mapper;
 		private readonly ILogger<HomeController> _logger;
 		private readonly UserManager<ApplicationUser> _userManager;
 		private readonly IClosedWeekService _closedWeekService;
 		private readonly ITimeEntryService _timeEntryService;
 
 		public HomeController(
-			IMapper mapper,
 			ILogger<HomeController> logger, 
 			UserManager<ApplicationUser> userManager,
 			IClosedWeekService closedWeekService,
 			ITimeEntryService timeEntryService)
 		{
-			_mapper = mapper;
 			_logger = logger;
 			_userManager = userManager;
 			_closedWeekService = closedWeekService;
 			_timeEntryService = timeEntryService;
 		}
 
-		public async Task<IActionResult> Index(string? weekDate, string? userId)
+		public async Task<IActionResult> Index(string? weekDate, int? userId)
 		{
 			DateTime? parsedWeekDate;
 			if (weekDate != null)
@@ -97,11 +95,11 @@ namespace TimeTracker.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> CreateTimeEntry(TimeEntryFormViewModel model)
+		public async Task<IActionResult> CreateTimeEntry(TimeEntryFormViewModel? model)
 		{
 			if (!ModelState.IsValid)
 			{
-				return BadRequest();
+				return BadRequest("CreateTimeEntry: The time entry creation form failed to pass validation!");
 			}
 
 			var selectedUserId = await EnsureSelectedUserId(model.UserId);
@@ -112,11 +110,19 @@ namespace TimeTracker.Controllers
 				HoursSpent = model.HoursSpent,
 				MinutesSpent = model.MinutesSpent,
 				Comment = model.Comment,
-				Date = GetCurrentWeek(),
-				Week = GetCurrentWeek()
+				Date = model.Date,
+				Week = model.Week
 			};
 
 			_timeEntryService.Add(newIssue);
+
+			return RedirectToAction("Index");
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Delete(int id)
+		{
+			_timeEntryService.Delete(_timeEntryService.FindById(id));
 
 			return RedirectToAction("Index");
 		}
@@ -157,14 +163,14 @@ namespace TimeTracker.Controllers
 			return monday;
 		}
 
-		private async Task<ApplicationUser?> GetCurrentUser()
+		private async Task<ApplicationUser> GetCurrentUser()
 		{
 			return await _userManager.GetUserAsync(HttpContext.User);
 		}
 
-		private async Task<string?> GetCurrentUserId()
+		private async Task<int> GetCurrentUserId()
 		{
-			return (await GetCurrentUser())?.Id;
+			return (await GetCurrentUser()).Id;
 		}
 
 		private async Task<bool> IsAdmin()
@@ -176,13 +182,9 @@ namespace TimeTracker.Controllers
 			return roles.Contains(Roles.Admin);
 		}
 
-		private async Task<string> EnsureSelectedUserId(string? userId)
+		private async Task<int> EnsureSelectedUserId(int? userId)
 		{
-			if (userId == null || !await IsAdmin())
-			{
-				return await GetCurrentUserId();
-			}
-			return userId;
+			return userId.HasValue && (await IsAdmin()) ? userId.Value : (await GetCurrentUserId());
 		}
 	}
 }

@@ -9,7 +9,7 @@ public static class DbContextSeed
 	public static async Task InitializeAsync(IServiceProvider services)
 	{
 		var roleManager = services
-			.GetRequiredService<RoleManager<IdentityRole>>();
+			.GetRequiredService<RoleManager<ApplicationRole>>();
 
 		await EnsureRolesAsync(roleManager);
 
@@ -19,7 +19,7 @@ public static class DbContextSeed
 		await EnsureTestAdminAsync(userManager);
 	}
 
-	private static async Task EnsureRolesAsync(RoleManager<IdentityRole> roleManager)
+	private static async Task EnsureRolesAsync(RoleManager<ApplicationRole> roleManager)
 	{
 		var adminRoleAlreadyExists = await roleManager
 			.RoleExistsAsync(Roles.Admin);
@@ -33,8 +33,8 @@ public static class DbContextSeed
 			return;
 		}
 
-		await roleManager.CreateAsync(new IdentityRole(Roles.User));
-		await roleManager.CreateAsync(new IdentityRole(Roles.Admin));
+		await roleManager.CreateAsync(new ApplicationRole(Roles.User));
+		await roleManager.CreateAsync(new ApplicationRole(Roles.Admin));
 	}
 
 	private static async Task EnsureTestAdminAsync(UserManager<ApplicationUser> userManager)
