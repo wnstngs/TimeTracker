@@ -28,7 +28,11 @@
 			<td>@user.UserEmail</td>
 			<td>@user.UserRoles</td>
 			<td>
-				<button class="btn btn-danger btn-sm" data-bs-toggle="modal" 
+				<button class="btn btn-primary btn-sm" data-bs-toggle="modal"
+						data-bs-target="#editUserModal" data-bs-id="@user.UserId">
+					Edit
+				</button>
+				<button class="btn btn-danger btn-sm" data-bs-toggle="modal"
 				        data-bs-target="#deleteUserModal" data-bs-id="@user.UserId">
 					Delete
 				</button>
@@ -37,6 +41,8 @@
 	}
 </table>
 
-@await Html.PartialAsync("Create", new CreateUserFormViewModel())
+@await Html.PartialAsync("Create", new UserFormViewModel())
+
+@await Html.PartialAsync("Edit")
 
 @await Html.PartialAsync("Delete")

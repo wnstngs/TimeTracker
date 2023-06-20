@@ -55,46 +55,119 @@
 
 <div class="row">
 	<div class="col-sm">
-		<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
-		        data-bs-target="#createTimeEntryModal"
-		        data-bs-date="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
-		        data-bs-week="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)">
-			<span class="bi bi-plus-lg"></span>
-			&nbsp;@Model.Week.DayOfWeek (@Model.Week.Day)
-		</button>
+		@if (Model.Week != Model.CurrentWeek || Model.IsWeekClosed)
+		{
+			<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
+			        data-bs-target="#createTimeEntryModal"
+			        data-bs-date="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
+			        data-bs-week="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
+			        disabled>
+				<span class="bi bi-plus-lg"></span>
+				&nbsp;@Model.Week.DayOfWeek (@Model.Week.Day)
+			</button>
+		}
+		else
+		{
+			<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
+			        data-bs-target="#createTimeEntryModal"
+			        data-bs-date="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
+			        data-bs-week="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)">
+				<span class="bi bi-plus-lg"></span>
+				&nbsp;@Model.Week.DayOfWeek (@Model.Week.Day)
+			</button>
+		}
 	</div>
 	<div class="col-sm">
-		<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
-		        data-bs-target="#createTimeEntryModal"
-		        data-bs-date="@Model.Week.AddDays(1).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
-		        data-bs-week="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)">
-			<span class="bi bi-plus-lg"></span>
-			&nbsp;@Model.Week.AddDays(1).DayOfWeek (@Model.Week.AddDays(1).Day)
-		</button>
+		@if (Model.Week != Model.CurrentWeek || Model.IsWeekClosed)
+		{
+			<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
+			        data-bs-target="#createTimeEntryModal"
+			        data-bs-date="@Model.Week.AddDays(1).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
+			        data-bs-week="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
+			        disabled>
+				<span class="bi bi-plus-lg"></span>
+				&nbsp;@Model.Week.AddDays(1).DayOfWeek (@Model.Week.AddDays(1).Day)
+			</button>
+		}
+		else
+		{
+			<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
+			        data-bs-target="#createTimeEntryModal"
+			        data-bs-date="@Model.Week.AddDays(1).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
+			        data-bs-week="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)">
+				<span class="bi bi-plus-lg"></span>
+				&nbsp;@Model.Week.AddDays(1).DayOfWeek (@Model.Week.AddDays(1).Day)
+			</button>
+		}
 	</div>
 	<div class="col-sm">
-		<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
-		        data-bs-target="#createTimeEntryModal" data-bs-date="@Model.Week.AddDays(2).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
-		        data-bs-week="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)">
-			<span class="bi bi-plus-lg"></span>
-			&nbsp;@Model.Week.AddDays(2).DayOfWeek (@Model.Week.AddDays(2).Day)
-		</button>
+		@if (Model.Week != Model.CurrentWeek || Model.IsWeekClosed)
+		{
+			<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
+					data-bs-target="#createTimeEntryModal"
+					data-bs-date="@Model.Week.AddDays(2).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
+					data-bs-week="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
+					disabled>
+				<span class="bi bi-plus-lg"></span>
+				&nbsp;@Model.Week.AddDays(2).DayOfWeek (@Model.Week.AddDays(2).Day)
+			</button>
+		}
+		else
+		{
+			<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
+					data-bs-target="#createTimeEntryModal"
+					data-bs-date="@Model.Week.AddDays(1).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
+					data-bs-week="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)">
+				<span class="bi bi-plus-lg"></span>
+				&nbsp;@Model.Week.AddDays(1).DayOfWeek (@Model.Week.AddDays(1).Day)
+			</button>
+		}
 	</div>
 	<div class="col-sm">
-		<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
-		        data-bs-target="#createTimeEntryModal" data-bs-date="@Model.Week.AddDays(3).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
-		        data-bs-week="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)">
-			<span class="bi bi-plus-lg"></span>
-			&nbsp;@Model.Week.AddDays(3).DayOfWeek (@Model.Week.AddDays(3).Day)
-		</button>
+		@if (Model.Week != Model.CurrentWeek || Model.IsWeekClosed)
+		{
+			<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
+					data-bs-target="#createTimeEntryModal"
+					data-bs-date="@Model.Week.AddDays(3).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
+					data-bs-week="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
+					disabled>
+				<span class="bi bi-plus-lg"></span>
+				&nbsp;@Model.Week.AddDays(3).DayOfWeek (@Model.Week.AddDays(3).Day)
+			</button>
+		}
+		else
+		{
+			<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
+					data-bs-target="#createTimeEntryModal"
+					data-bs-date="@Model.Week.AddDays(3).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
+					data-bs-week="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)">
+				<span class="bi bi-plus-lg"></span>
+				&nbsp;@Model.Week.AddDays(3).DayOfWeek (@Model.Week.AddDays(3).Day)
+			</button>
+		}
 	</div>
 	<div class="col-sm">
-		<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
-		        data-bs-target="#createTimeEntryModal" data-bs-date="@Model.Week.AddDays(4).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
-		        data-bs-week="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)">
-			<span class="bi bi-plus-lg"></span>
-			&nbsp;@Model.Week.AddDays(4).DayOfWeek (@Model.Week.AddDays(4).Day)
-		</button>
+		@if (Model.Week != Model.CurrentWeek || Model.IsWeekClosed)
+		{
+			<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
+					data-bs-target="#createTimeEntryModal"
+					data-bs-date="@Model.Week.AddDays(4).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
+					data-bs-week="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
+					disabled>
+				<span class="bi bi-plus-lg"></span>
+				&nbsp;@Model.Week.AddDays(4).DayOfWeek (@Model.Week.AddDays(4).Day)
+			</button>
+		}
+		else
+		{
+			<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
+					data-bs-target="#createTimeEntryModal"
+					data-bs-date="@Model.Week.AddDays(4).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
+					data-bs-week="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)">
+				<span class="bi bi-plus-lg"></span>
+				&nbsp;@Model.Week.AddDays(4).DayOfWeek (@Model.Week.AddDays(4).Day)
+			</button>
+		}
 	</div>
 </div>
 <div class="row">
@@ -115,11 +188,14 @@
 								<p class="card-text">
 									@timeEntry.Comment
 								</p>
-								<a href="#" class="btn btn-primary btn-sm">Edit</a>
-								<a class="btn btn-danger btn-sm" data-bs-toggle="modal"
-								   data-bs-target="#deleteTimeEntryModal" data-bs-id="@timeEntry.Id">
-									Delete
-								</a>
+								@if (Model.Week == Model.CurrentWeek && !Model.IsWeekClosed)
+								{
+									<a href="#" class="btn btn-primary btn-sm">Edit</a>
+									<a class="btn btn-danger btn-sm" data-bs-toggle="modal"
+									   data-bs-target="#deleteTimeEntryModal" data-bs-id="@timeEntry.Id">
+										Delete
+									</a>
+								}
 							</div>
 						</div>
 					</li>
@@ -144,11 +220,14 @@
 								<p class="card-text">
 									@timeEntry.Comment
 								</p>
-								<a href="#" class="btn btn-primary btn-sm">Edit</a>
-								<a class="btn btn-danger btn-sm" data-bs-toggle="modal"
-								   data-bs-target="#deleteTimeEntryModal" data-bs-id="@timeEntry.Id">
-									Delete
-								</a>
+								@if (Model.Week == Model.CurrentWeek && !Model.IsWeekClosed)
+								{
+									<a href="#" class="btn btn-primary btn-sm">Edit</a>
+									<a class="btn btn-danger btn-sm" data-bs-toggle="modal"
+									   data-bs-target="#deleteTimeEntryModal" data-bs-id="@timeEntry.Id">
+										Delete
+									</a>
+								}
 							</div>
 						</div>
 					</li>
@@ -173,11 +252,14 @@
 								<p class="card-text">
 									@timeEntry.Comment
 								</p>
-								<a href="#" class="btn btn-primary btn-sm">Edit</a>
-								<a class="btn btn-danger btn-sm" data-bs-toggle="modal"
-								   data-bs-target="#deleteTimeEntryModal" data-bs-id="@timeEntry.Id">
-									Delete
-								</a>
+								@if (Model.Week == Model.CurrentWeek && !Model.IsWeekClosed)
+								{
+									<a href="#" class="btn btn-primary btn-sm">Edit</a>
+									<a class="btn btn-danger btn-sm" data-bs-toggle="modal"
+									   data-bs-target="#deleteTimeEntryModal" data-bs-id="@timeEntry.Id">
+										Delete
+									</a>
+								}
 							</div>
 						</div>
 					</li>
@@ -202,11 +284,14 @@
 								<p class="card-text">
 									@timeEntry.Comment
 								</p>
-								<a href="#" class="btn btn-primary btn-sm">Edit</a>
-								<a class="btn btn-danger btn-sm" data-bs-toggle="modal"
-								   data-bs-target="#deleteTimeEntryModal" data-bs-id="@timeEntry.Id">
-									Delete
-								</a>
+								@if (Model.Week == Model.CurrentWeek && !Model.IsWeekClosed)
+								{
+									<a href="#" class="btn btn-primary btn-sm">Edit</a>
+									<a class="btn btn-danger btn-sm" data-bs-toggle="modal"
+									   data-bs-target="#deleteTimeEntryModal" data-bs-id="@timeEntry.Id">
+										Delete
+									</a>
+								}
 							</div>
 						</div>
 					</li>
@@ -231,11 +316,14 @@
 								<p class="card-text">
 									@timeEntry.Comment
 								</p>
-								<a href="#" class="btn btn-primary btn-sm">Edit</a>
-								<a class="btn btn-danger btn-sm" data-bs-toggle="modal"
-								   data-bs-target="#deleteTimeEntryModal" data-bs-id="@timeEntry.Id">
-									Delete
-								</a>
+								@if (Model.Week == Model.CurrentWeek && !Model.IsWeekClosed)
+								{
+									<a href="#" class="btn btn-primary btn-sm">Edit</a>
+									<a class="btn btn-danger btn-sm" data-bs-toggle="modal"
+									   data-bs-target="#deleteTimeEntryModal" data-bs-id="@timeEntry.Id">
+										Delete
+									</a>
+								}
 							</div>
 						</div>
 					</li>

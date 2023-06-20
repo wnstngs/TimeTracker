@@ -30,7 +30,7 @@ namespace TimeTracker.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateUserFormViewModel user)
+        public async Task<IActionResult> Create(UserFormViewModel user)
         {
 	        if (!ModelState.IsValid)
 	        {
@@ -82,5 +82,13 @@ namespace TimeTracker.Controllers
 
             return RedirectToAction("Index");
 		}
-    }
+
+		[HttpPost]
+		public IActionResult Edit(UserFormViewModel model)
+		{
+			
+
+			return RedirectToAction("Index");
+		}
+	}
 }

@@ -2,7 +2,7 @@
 
 namespace TimeTracker.Models
 {
-    public class CreateUserFormViewModel
+    public class UserFormViewModel
     {
         [Required]
         [EmailAddress]
