@@ -48,7 +48,7 @@ public abstract class BaseService<T> where T : class
 		dataContext.SaveChanges();
 	}
 
-	public virtual void Delete(Expression<Func<T, bool>> where, bool forceDelete = false)
+	public virtual void Delete(Expression<Func<T, bool>> where)
 	{
 		var entities = dbSet.Where(where).AsEnumerable();
 

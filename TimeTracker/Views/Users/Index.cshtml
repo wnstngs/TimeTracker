@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DataTableUser>
+﻿@model IEnumerable<UsersListViewModel>
 
 @{
 	ViewData["Title"] = "Manage users";
@@ -37,6 +37,6 @@
 	}
 </table>
 
-@await Html.PartialAsync("Create", new CreateUserViewModel())
+@await Html.PartialAsync("Create", new CreateUserFormViewModel())
 
 @await Html.PartialAsync("Delete")

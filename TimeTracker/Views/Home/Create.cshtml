@@ -1,18 +1,32 @@
-﻿<div class="modal fade" id="createTimeEntryModal" tabindex="-1"
-	 aria-labelledby="createTimeEntryModal" aria-hidden="true">
+﻿@model TimeEntryFormViewModel
+
+<div class="modal fade" id="createTimeEntryModal" tabindex="-1"
+     aria-labelledby="createTimeEntryModal" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="createTimeEntryModalTitle"></h5>
+				<h5 class="modal-title" id="createTimeEntryModalTitle">New time entry</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
-			<form action="@Url.Action("Create", "Users")" method="post">
+			<form action="@Url.Action("CreateTimeEntry", "Home")" method="post">
 				<div class="modal-body">
 					<div class="form-floating mb-3">
+						<input asp-for="Comment" class="form-control" aria-required="true" 
+						       placeholder="" />
+						<label asp-for="Comment">Comment</label>
+						<span asp-validation-for="Comment" class="text-danger"></span>
 					</div>
 					<div class="form-floating mb-3">
+						<input asp-for="HoursSpent" class="form-control" aria-required="true"
+							   placeholder="" />
+						<label asp-for="HoursSpent">Hours spent</label>
+						<span asp-validation-for="HoursSpent" class="text-danger"></span>
 					</div>
 					<div class="form-floating mb-3">
+						<input asp-for="MinutesSpent" class="form-control" aria-required="true"
+							   placeholder="" />
+						<label asp-for="MinutesSpent">Minutes spent</label>
+						<span asp-validation-for="MinutesSpent" class="text-danger"></span>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -23,3 +37,8 @@
 		</div>
 	</div>
 </div>
+
+@section Scripts
+{
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,4 +1,4 @@
-﻿@model CreateUserViewModel
+﻿@model CreateUserFormViewModel
 
 <div class="modal fade" id="createUserModal" tabindex="-1" aria-labelledby="createUserModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
@@ -15,12 +15,14 @@
 						<span asp-validation-for="Email" class="text-danger"></span>
 					</div>
 					<div class="form-floating mb-3">
-						<input asp-for="Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password"/>
+						<input asp-for="Password" class="form-control" autocomplete="new-password" type="password" 
+						       aria-required="true" placeholder="password"/>
 						<label asp-for="Password">Password</label>
 						<span asp-validation-for="Password" class="text-danger"></span>
 					</div>
 					<div class="form-floating mb-3">
-						<input asp-for="ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password"/>
+						<input asp-for="ConfirmPassword" class="form-control" autocomplete="new-password" type="password"
+						       aria-required="true" placeholder="password" />
 						<label asp-for="ConfirmPassword">Confirm Password</label>
 						<span asp-validation-for="ConfirmPassword" class="text-danger"></span>
 					</div>

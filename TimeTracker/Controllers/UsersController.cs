@@ -18,7 +18,7 @@ namespace TimeTracker.Controllers
 
         public IActionResult Index()
         {
-	        var users = _userManager.Users.Select(u => new DataTableUser
+	        var users = _userManager.Users.Select(u => new UsersListViewModel
             {
                 UserId = u.Id,
                 UserName = u.UserName,
@@ -30,7 +30,7 @@ namespace TimeTracker.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateUserViewModel user)
+        public async Task<IActionResult> Create(CreateUserFormViewModel user)
         {
 	        if (!ModelState.IsValid)
 	        {

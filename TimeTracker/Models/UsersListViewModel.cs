@@ -1,6 +1,6 @@
 ﻿namespace TimeTracker.Models;
 
-public class DataTableUser
+public class UsersListViewModel
 {
     public string UserId { get; set; }
 

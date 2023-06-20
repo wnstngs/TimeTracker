@@ -96,11 +96,16 @@ namespace TimeTracker.Controllers
 			});
 		}
 
-		/*
 		[HttpPost]
-		[ValidateModel]
-		public async Task<IActionResult> CreateTimeEntry([FromBody] TimeEntryFormViewModel model)
+		public async Task<IActionResult> CreateTimeEntry(
+			[FromBody] TimeEntryFormViewModel model
+		)
 		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest();
+			}
+
 			var selectedUserId = await EnsureSelectedUserId(model.UserId);
 
 			var newIssue = new TimeEntry
@@ -115,14 +120,7 @@ namespace TimeTracker.Controllers
 
 			_timeEntryService.Add(newIssue);
 
-			var response = new IssueProjectCodeViewModel
-			{
-				Id = newIssue.Id,
-				ProjectCodeExists = projectCodeExists,
-				NonExistentProjectCode = nonExistentProjectCode
-			};
-
-			return Json(response);
+			return RedirectToAction("Index");
 		}
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -134,7 +132,6 @@ namespace TimeTracker.Controllers
 					RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
 				});
 		}
-		*/
 
 		private DateTime GetCurrentWeek()
 		{

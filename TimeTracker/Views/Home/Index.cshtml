@@ -2,14 +2,14 @@
 @using Microsoft.AspNetCore.Identity
 @model TimeEntriesListViewModel
 @inject IAuthorizationService AuthorizationService
-@inject UserManager<ApplicationUser> userManager
+@inject UserManager<ApplicationUser> UserManager
 
 @{
 	ViewData["Title"] = "Time Tracker";
 
-	var currentUser = await userManager.GetUserAsync(User);
+	var currentUser = await UserManager.GetUserAsync(User);
 	var isAdmin = currentUser != null
-	              && await userManager.IsInRoleAsync(currentUser, Roles.Admin);
+	              && await UserManager.IsInRoleAsync(currentUser, Roles.Admin);
 
 	// Date for Monday of the current week.
 	var weekMonday = Model.Week;
@@ -21,7 +21,7 @@
 	var nextWeekMonday = weekMonday.AddDays(7);
 }
 
-<div class="row justify-content-end">
+<div class="row justify-content-end mb-2">
 	<div class="col-4">
 		<div class="d-flex justify-content-center">
 			<a href="@Url.Action("Index", "Home", new { weekDate = previousWeekMonday.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks) })"
@@ -98,4 +98,5 @@
 	<div class="col-sm">...</div>
 </div>
 
-@await Html.PartialAsync("Create")
+@await Html.PartialAsync("Create", new TimeEntryFormViewModel())
+

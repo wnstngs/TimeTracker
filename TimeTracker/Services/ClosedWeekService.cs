@@ -1,10 +1,11 @@
 ﻿using TimeTracker.Data;
+using TimeTracker.Models;
 using TimeTracker.Services.Base;
 using TimeTracker.Services.Contracts;
 
 namespace TimeTracker.Services;
 
-public class ClosedWeekService : BaseService<ClosedWeekService>, IClosedWeekService
+public class ClosedWeekService : BaseService<ClosedWeek>, IClosedWeekService
 {
 	public ClosedWeekService(ApplicationDbContext dataContext) : base(dataContext)
 	{

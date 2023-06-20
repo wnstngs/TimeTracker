@@ -1,6 +1,9 @@
-﻿namespace TimeTracker.Services.Contracts;
+﻿using TimeTracker.Models;
+using TimeTracker.Services.Base;
 
-public interface IClosedWeekService
+namespace TimeTracker.Services.Contracts;
+
+public interface IClosedWeekService : IBaseService<ClosedWeek>
 {
 	bool IsWeekClosed(string? userId, DateTime week);
 }
