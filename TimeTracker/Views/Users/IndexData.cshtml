@@ -1,0 +1,33 @@
+﻿@model IEnumerable<UsersListViewModel>
+
+<div id="table">
+	<table class="table">
+		<thead>
+		<tr>
+			<td>Name</td>
+			<td>Email</td>
+			<td>Roles</td>
+			<td></td>
+		</tr>
+		</thead>
+
+		@foreach (var user in Model)
+		{
+			<tr>
+				<td>@user.UserName</td>
+				<td>@user.UserEmail</td>
+				<td>@user.UserRoles</td>
+				<td>
+					<a href="@Url.Action("Edit", "Users", new { id = user.UserId })" class="btn btn-primary btn-sm btn-modal"
+					   data-bs-toggle="modal" data-bs-target="#modal">
+						Edit
+					</a>
+					<a href="@Url.Action("Delete", "Users", new { id = user.UserId })" class="btn btn-danger btn-sm btn-modal"
+					   data-bs-toggle="modal" data-bs-target="#modal">
+						Delete
+					</a>
+				</td>
+			</tr>
+		}
+	</table>
+</div>

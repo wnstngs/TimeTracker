@@ -19,14 +19,33 @@ namespace TimeTracker.Controllers
         public IActionResult Index()
         {
 	        var users = _userManager.Users.Select(u => new UsersListViewModel
-            {
-                UserId = u.Id,
-                UserName = u.UserName,
-                UserEmail = u.Email,
-                UserRoles = string.Join(",", _userManager.GetRolesAsync(u).Result.ToArray())
-            });
+	        {
+		        UserId = u.Id,
+		        UserName = u.UserName,
+		        UserEmail = u.Email,
+		        UserRoles = string.Join(",", _userManager.GetRolesAsync(u).Result.ToArray())
+	        });
 
-            return View(users);
+			return View(users);
+        }
+
+        public IActionResult IndexData()
+        {
+	        var users = _userManager.Users.Select(u => new UsersListViewModel
+	        {
+		        UserId = u.Id,
+		        UserName = u.UserName,
+		        UserEmail = u.Email,
+		        UserRoles = string.Join(",", _userManager.GetRolesAsync(u).Result.ToArray())
+	        });
+
+	        return PartialView(users);
+        }
+
+		[HttpGet]
+        public IActionResult Create()
+        {
+	        return PartialView("Create", new UserFormViewModel());
         }
 
         [HttpPost]
@@ -60,17 +79,65 @@ namespace TimeTracker.Controllers
 	        await _userManager.CreateAsync(newUser, user.Password);
 	        await _userManager.AddToRoleAsync(newUser, Roles.User);
 
-	        return RedirectToAction("Index");
+	        return Ok("User created successfully.");
         }
 
-        [HttpPost]
-		public async Task<IActionResult> Delete(int id)
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
         {
-	        var userToDelete = await _userManager.Users
+	        var user = await _userManager.Users
 		        .Where(x => x.Id == id)
 		        .SingleOrDefaultAsync();
 
-	        if (userToDelete == null)
+	        if (user == null)
+	        {
+		        //
+		        // There is no user with that Id.
+		        //
+		        return BadRequest("There is no user with that Id.");
+	        }
+
+	        var model = new UserFormViewModel(user.Id!, user.Email!);
+
+			return PartialView("Edit", model);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(UserFormViewModel model)
+        {
+	        return RedirectToAction("Index");
+        }
+
+		[HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+	        var user = await _userManager.Users
+		        .Where(x => x.Id == id)
+		        .SingleOrDefaultAsync();
+
+	        if (user == null)
+	        {
+		        //
+		        // There is no user with that Id.
+		        //
+		        return BadRequest("There is no user with that Id.");
+	        }
+
+	        var model = new UserFormViewModel(user.Id!, user.Email!);
+
+			return PartialView("Delete", model);
+        }
+
+		[HttpPost]
+		[ActionName("Delete")]
+		public async Task<IActionResult> DeletePost(int id)
+        {
+	        var user = await _userManager.Users
+		        .Where(x => x.Id == id)
+		        .SingleOrDefaultAsync();
+
+	        if (user == null)
 	        {
 				//
 				// There is no user with that Id.
@@ -78,17 +145,9 @@ namespace TimeTracker.Controllers
 				return BadRequest("There is no user with that Id.");
 	        }
 
-            await _userManager.DeleteAsync(userToDelete);
+            await _userManager.DeleteAsync(user);
 
-            return RedirectToAction("Index");
+            return Ok("User deleted successfully.");
 		}
-
-		[HttpPost]
-		public IActionResult Edit(UserFormViewModel model)
-		{
-			
-
-			return RedirectToAction("Index");
-		}
-	}
+    }
 }

@@ -6,43 +6,70 @@
 
 <div class="d-flex justify-content-between">
 	<h2>@ViewData["Title"]</h2>
-	<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createUserModal">
+	<a href="@Url.Action("Create", "Users")" 
+	   class="btn btn-primary btn-modal my-auto"
+	   data-bs-toggle="modal" data-bs-target="#modal">
 		Create user
-	</button>
+	</a>
 </div>
 
-<table class="table">
-	<thead>
-	<tr>
-		<td>Name</td>
-		<td>Email</td>
-		<td>Roles</td>
-		<td></td>
-	</tr>
-	</thead>
+<div id="alert-parent"></div>
 
-	@foreach (var user in Model)
-	{
-		<tr>
-			<td>@user.UserName</td>
-			<td>@user.UserEmail</td>
-			<td>@user.UserRoles</td>
-			<td>
-				<button class="btn btn-primary btn-sm" data-bs-toggle="modal"
-						data-bs-target="#editUserModal" data-bs-id="@user.UserId">
-					Edit
-				</button>
-				<button class="btn btn-danger btn-sm" data-bs-toggle="modal"
-				        data-bs-target="#deleteUserModal" data-bs-id="@user.UserId">
-					Delete
-				</button>
-			</td>
-		</tr>
+@await Html.PartialAsync("IndexData", Model)
+
+<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			Loading...
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
 	}
-</table>
 
-@await Html.PartialAsync("Create", new UserFormViewModel())
+	<script>
+		$('main').on('click', '.btn-modal', (event) => {
+			event.preventDefault();
+		
+			const url = event.target.getAttribute('href');
+			$('.modal-content').load(url);
+		});
 
-@await Html.PartialAsync("Edit")
+		const modalJquery = $('#modal');
+		modalJquery.on('submit', '#userForm', (event) => {
+			event.preventDefault();
 
-@await Html.PartialAsync("Delete")
+			const form = $('#userForm');
+			$.ajax({
+				type: form.attr('method'),
+				url: form.attr('action'),
+				data: form.serialize()
+			}).done((data) => {
+				$('#table').load('/Users/IndexData');
+				$('#alert-parent').html(
+					`<div class="alert alert-success alert-dismissible fade show" role="alert">
+						<strong>Success.</strong> ` + data + `
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>`
+				);
+			}).fail((data) => {
+				$('#alert-parent').html(
+					`<div class="alert alert-danger alert-dismissible fade show" role="alert">
+						<strong>Error.</strong> ` + data.responseText + `
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>`
+				);
+			}).always(() => {
+				modalJquery.modal('hide');
+			});
+		});
+
+		const modal = document.getElementById('modal');
+		modal.addEventListener('hide.bs.modal', function () {
+			$('.modal-content').html(`Loading...`);
+		});
+	</script>
+}

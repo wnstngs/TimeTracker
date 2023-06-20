@@ -116,10 +116,10 @@
 		{
 			<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
 					data-bs-target="#createTimeEntryModal"
-					data-bs-date="@Model.Week.AddDays(1).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
+					data-bs-date="@Model.Week.AddDays(2).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
 					data-bs-week="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)">
 				<span class="bi bi-plus-lg"></span>
-				&nbsp;@Model.Week.AddDays(1).DayOfWeek (@Model.Week.AddDays(1).Day)
+				&nbsp;@Model.Week.AddDays(2).DayOfWeek (@Model.Week.AddDays(2).Day)
 			</button>
 		}
 	</div>
