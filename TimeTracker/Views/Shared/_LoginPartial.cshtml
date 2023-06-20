@@ -9,6 +9,7 @@
 	*@
 	@if (SignInManager.IsSignedIn(User))
 	{
+		@await Html.PartialAsync("_AdminActionsPartial")
 		<li class="nav-item">
 			<a class="nav-link text-dark"
 			   asp-area="Identity"

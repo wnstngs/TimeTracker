@@ -21,16 +21,10 @@
 	var nextWeekMonday = weekMonday.AddDays(7);
 }
 
-<div class="container-fluid">
-	<div class="d-flex justify-content-between pb-3">
-		<h4 class="fw-bold">
-		</h4>
-		<div class="hstack">
-			<a href="@Url.Action("Index", "Home", 
-				         new 
-				         {
-					         weekDate = previousWeekMonday.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)
-				         })"
+<div class="row justify-content-end">
+	<div class="col-4">
+		<div class="d-flex justify-content-center">
+			<a href="@Url.Action("Index", "Home", new { weekDate = previousWeekMonday.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks) })"
 			   class="btn btn-light btn-sm me-2">
 				<i class="bi bi-arrow-left text-dark"></i>
 			</a>
@@ -39,74 +33,69 @@
 			</h4>
 			@if (Model.Week != Model.CurrentWeek)
 			{
-				<a href="@Url.Action("Index", "Home", 
-					         new 
-					         {
-						         weekDate = nextWeekMonday.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)
-					         })"
+				<a href="@Url.Action("Index", "Home", new { weekDate = nextWeekMonday.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks) })"
 				   class="btn btn-light btn-sm ms-2">
 					<i class="bi bi-arrow-right text-dark"></i>
 				</a>
 			}
 		</div>
-		<div class="hstack">
-			@if (isAdmin && Model.IsWeekClosed)
-			{
-				<button type="button" class="btn btn-primary btn-sm">
-					Open Week
-				</button>
-			}
+	</div>
+	<div class="col-4">
+		<div class="d-flex justify-content-end">
 			@if (Model.Week == Model.CurrentWeek &&
 			     !Model.IsWeekClosed)
 			{
-				<button type="button" class="btn btn-primary btn-sm">
+				<button type="button" class="btn btn-primary">
 					Complete Week
 				</button>
 			}
 		</div>
+	</div>  
+</div>
+
+<div class="row">
+	<div class="col-sm">
+		<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
+		        data-bs-target="#createTimeEntryModal">
+			<span class="bi bi-plus-lg"></span>
+			&nbsp;@Model.CurrentDayOfWeek
+		</button>
 	</div>
-	<div class="row">
-		<div class="col">
-			<div class="row">
-				<h5 class="text-center fw-bolder">
-					Mon
-				</h5>
-			</div>
-			<div class="row overflow-auto">
-				...
-			</div>
-		</div>
-		<div class="col">
-			<div class="row">
-				<h5 class="text-center fw-bolder">
-					Tue
-				</h5>
-			</div>
-			<div class="row overflow-auto">...</div>
-		</div>
-		<div class="col">
-			<div class="row">
-				<h5 class="text-center fw-bolder">
-					Wed
-				</h5>
-			</div>
-			<div class="row overflow-auto">...</div>
-		</div>
-		<div class="col">
-			<div class="row">
-				<h5 class="text-center fw-bolder">
-					Thu
-				</h5>
-			</div>
-			<div class="row overflow-auto">...</div>
-		</div>
-		<div class="col">
-			<div class="row">
-				<h5 class="text-center fw-bolder">
-					Fri
-				</h5>
-			</div>
-			<div class="row overflow-auto">...</div>
-		</div>
+	<div class="col-sm">
+		<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
+				data-bs-target="#createTimeEntryModal">
+			<span class="bi bi-plus-lg"></span>
+			&nbsp;@Model.CurrentDayOfWeek
+		</button>
+	</div>
+	<div class="col-sm">
+		<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
+				data-bs-target="#createTimeEntryModal">
+			<span class="bi bi-plus-lg"></span>
+			&nbsp;@Model.CurrentDayOfWeek
+		</button>
+	</div>
+	<div class="col-sm">
+		<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
+				data-bs-target="#createTimeEntryModal">
+			<span class="bi bi-plus-lg"></span>
+			&nbsp;@Model.CurrentDayOfWeek
+		</button>
+	</div>
+	<div class="col-sm">
+		<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
+				data-bs-target="#createTimeEntryModal">
+			<span class="bi bi-plus-lg"></span>
+			&nbsp;@Model.CurrentDayOfWeek
+		</button>
 	</div>
 </div>
+<div class="row">
+	<div class="col-sm">...</div>
+	<div class="col-sm">...</div>
+	<div class="col-sm">...</div>
+	<div class="col-sm">...</div>
+	<div class="col-sm">...</div>
+</div>
+
+@await Html.PartialAsync("Create")
