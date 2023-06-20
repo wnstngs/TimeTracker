@@ -77,9 +77,9 @@ namespace TimeTracker.Controllers
 			var currentWeekTimeEntries = _timeEntryService.GetAllByUserAndWeek(selectedUserId, week);
 			var nextWeekTimeEntries = _timeEntryService.GetAllByUserAndWeek(selectedUserId, nextWeek);
 
-			var currentWeekEntries = _mapper.Map<List<TimeEntryViewModel>>(currentWeekTimeEntries);
-			var previousWeekEntries = _mapper.Map<List<TimeEntryViewModel>>(previousWeekTimeEntries);
-			var nextWeekEntries = _mapper.Map<List<TimeEntryViewModel>>(nextWeekTimeEntries);
+			var previousWeekEntries = MapTimeEntriesToTimeEntryViewModels(previousWeekTimeEntries);
+			var currentWeekEntries = MapTimeEntriesToTimeEntryViewModels(currentWeekTimeEntries);
+			var nextWeekEntries = MapTimeEntriesToTimeEntryViewModels(nextWeekTimeEntries);
 
 			return View(new TimeEntriesListViewModel(
 				previousWeekEntries,
@@ -97,9 +97,7 @@ namespace TimeTracker.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> CreateTimeEntry(
-			[FromBody] TimeEntryFormViewModel model
-		)
+		public async Task<IActionResult> CreateTimeEntry(TimeEntryFormViewModel model)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -114,8 +112,8 @@ namespace TimeTracker.Controllers
 				HoursSpent = model.HoursSpent,
 				MinutesSpent = model.MinutesSpent,
 				Comment = model.Comment,
-				Date = model.Date,
-				Week = model.Week
+				Date = GetCurrentWeek(),
+				Week = GetCurrentWeek()
 			};
 
 			_timeEntryService.Add(newIssue);
@@ -131,6 +129,25 @@ namespace TimeTracker.Controllers
 				{
 					RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
 				});
+		}
+
+		private List<TimeEntryViewModel> MapTimeEntriesToTimeEntryViewModels(List<TimeEntry> timeEntries)
+		{
+			List<TimeEntryViewModel> timeEntryViewModels = new();
+			foreach (var timeEntry in timeEntries)
+			{
+				timeEntryViewModels.Add(new TimeEntryViewModel
+				{
+					Id = timeEntry.Id,
+					UserId = timeEntry.UserId,
+					HoursSpent = timeEntry.HoursSpent,
+					MinutesSpent = timeEntry.MinutesSpent,
+					Comment = timeEntry.Comment,
+					Date = timeEntry.Date,
+					Week = timeEntry.Week
+				});
+			}
+			return timeEntryViewModels;
 		}
 
 		private DateTime GetCurrentWeek()

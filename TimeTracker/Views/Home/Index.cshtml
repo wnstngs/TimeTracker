@@ -50,7 +50,7 @@
 				</button>
 			}
 		</div>
-	</div>  
+	</div>
 </div>
 
 <div class="row">
@@ -58,45 +58,169 @@
 		<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
 		        data-bs-target="#createTimeEntryModal">
 			<span class="bi bi-plus-lg"></span>
-			&nbsp;@Model.CurrentDayOfWeek
+			&nbsp;@Model.Week.DayOfWeek (@Model.Week.Day)
 		</button>
 	</div>
 	<div class="col-sm">
 		<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
-				data-bs-target="#createTimeEntryModal">
+		        data-bs-target="#createTimeEntryModal">
 			<span class="bi bi-plus-lg"></span>
-			&nbsp;@Model.CurrentDayOfWeek
+			&nbsp;@Model.Week.AddDays(1).DayOfWeek (@Model.Week.AddDays(1).Day)
 		</button>
 	</div>
 	<div class="col-sm">
 		<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
-				data-bs-target="#createTimeEntryModal">
+		        data-bs-target="#createTimeEntryModal">
 			<span class="bi bi-plus-lg"></span>
-			&nbsp;@Model.CurrentDayOfWeek
+			&nbsp;@Model.Week.AddDays(2).DayOfWeek (@Model.Week.AddDays(2).Day)
 		</button>
 	</div>
 	<div class="col-sm">
 		<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
-				data-bs-target="#createTimeEntryModal">
+		        data-bs-target="#createTimeEntryModal">
 			<span class="bi bi-plus-lg"></span>
-			&nbsp;@Model.CurrentDayOfWeek
+			&nbsp;@Model.Week.AddDays(3).DayOfWeek (@Model.Week.AddDays(3).Day)
 		</button>
 	</div>
 	<div class="col-sm">
 		<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
-				data-bs-target="#createTimeEntryModal">
+		        data-bs-target="#createTimeEntryModal">
 			<span class="bi bi-plus-lg"></span>
-			&nbsp;@Model.CurrentDayOfWeek
+			&nbsp;@Model.Week.AddDays(4).DayOfWeek (@Model.Week.AddDays(4).Day)
 		</button>
 	</div>
 </div>
 <div class="row">
-	<div class="col-sm">...</div>
-	<div class="col-sm">...</div>
-	<div class="col-sm">...</div>
-	<div class="col-sm">...</div>
-	<div class="col-sm">...</div>
+	<div class="col-sm">
+		<ul class="list-unstyled">
+			@foreach (var timeEntry in Model.CurrentWeekEntries)
+			{
+				@if (timeEntry.Week == Model.Week)
+				{
+					<li>
+						<div class="card">
+							<div class="card-header">
+								<p class="card-text">
+									@timeEntry.Comment
+								</p>
+							</div>
+							<div class="card-body">
+								<p class="card-text">
+									@timeEntry.HoursSpent h @timeEntry.MinutesSpent min
+								</p>
+								<a href="#" class="btn btn-primary btn-sm">Edit</a>
+								<a href="#" class="btn btn-danger btn-sm">Delete</a>
+							</div>
+						</div>
+					</li>
+				}
+			}
+		</ul>
+	</div>
+	<div class="col-sm">
+		<ul class="list-unstyled">
+			@foreach (var timeEntry in Model.CurrentWeekEntries)
+			{
+				@if (timeEntry.Week == Model.Week.AddDays(1))
+				{
+					<li>
+						<div class="card">
+							<div class="card-header">
+								<p class="card-text">
+									@timeEntry.Comment
+								</p>
+							</div>
+							<div class="card-body">
+								<p class="card-text">
+									@timeEntry.HoursSpent h @timeEntry.MinutesSpent min
+								</p>
+								<a href="#" class="btn btn-primary btn-sm">Edit</a>
+								<a href="#" class="btn btn-danger btn-sm">Delete</a>
+							</div>
+						</div>
+					</li>
+				}
+			}
+		</ul>
+	</div>
+	<div class="col-sm">
+		<ul class="list-unstyled">
+			@foreach (var timeEntry in Model.CurrentWeekEntries)
+			{
+				@if (timeEntry.Week == Model.Week.AddDays(2))
+				{
+					<li>
+						<div class="card">
+							<div class="card-header">
+								<p class="card-text">
+									@timeEntry.Comment
+								</p>
+							</div>
+							<div class="card-body">
+								<p class="card-text">
+									@timeEntry.HoursSpent h @timeEntry.MinutesSpent min
+								</p>
+								<a href="#" class="btn btn-primary btn-sm">Edit</a>
+								<a href="#" class="btn btn-danger btn-sm">Delete</a>
+							</div>
+						</div>
+					</li>
+				}
+			}
+		</ul>
+	</div>
+	<div class="col-sm">
+		<ul class="list-unstyled">
+			@foreach (var timeEntry in Model.CurrentWeekEntries)
+			{
+				@if (timeEntry.Week == Model.Week.AddDays(3))
+				{
+					<li>
+						<div class="card">
+							<div class="card-header">
+								<p class="card-text">
+									@timeEntry.Comment
+								</p>
+							</div>
+							<div class="card-body">
+								<p class="card-text">
+									@timeEntry.HoursSpent h @timeEntry.MinutesSpent min
+								</p>
+								<a href="#" class="btn btn-primary btn-sm">Edit</a>
+								<a href="#" class="btn btn-danger btn-sm">Delete</a>
+							</div>
+						</div>
+					</li>
+				}
+			}
+		</ul>
+	</div>
+	<div class="col-sm">
+		<ul class="list-unstyled">
+			@foreach (var timeEntry in Model.CurrentWeekEntries)
+			{
+				@if (timeEntry.Week == Model.Week.AddDays(4))
+				{
+					<li>
+						<div class="card">
+							<div class="card-header">
+								<p class="card-text">
+									@timeEntry.Comment
+								</p>
+							</div>
+							<div class="card-body">
+								<p class="card-text">
+									@timeEntry.HoursSpent h @timeEntry.MinutesSpent min
+								</p>
+								<a href="#" class="btn btn-primary btn-sm">Edit</a>
+								<a href="#" class="btn btn-danger btn-sm">Delete</a>
+							</div>
+						</div>
+					</li>
+				}
+			}
+		</ul>
+	</div>
 </div>
 
 @await Html.PartialAsync("Create", new TimeEntryFormViewModel())
-
