@@ -123,13 +123,28 @@
   <data name="Edit" xml:space="preserve">
     <value>Rediģēt</value>
   </data>
+  <data name="Friday" xml:space="preserve">
+    <value>Piektdiena</value>
+  </data>
   <data name="Hours" xml:space="preserve">
     <value>st.</value>
   </data>
   <data name="Minutes" xml:space="preserve">
     <value>min</value>
   </data>
+  <data name="Monday" xml:space="preserve">
+    <value>Primdiena</value>
+  </data>
+  <data name="Thursday" xml:space="preserve">
+    <value>Ceturtdiena</value>
+  </data>
   <data name="Title" xml:space="preserve">
     <value>Laika izsekošana</value>
+  </data>
+  <data name="Tuesday" xml:space="preserve">
+    <value>Otrdiena</value>
+  </data>
+  <data name="Wednesday" xml:space="preserve">
+    <value>Trešdiena</value>
   </data>
 </root>

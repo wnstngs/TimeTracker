@@ -93,6 +93,23 @@ builder.Services.AddScoped<IClosedWeekService, ClosedWeekService>();
 builder.Services.AddScoped<ITimeEntryService, TimeEntryService>();
 builder.Services.AddScoped<IUserService, UserService>();
 
+//
+// Localization.
+//
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+	var supportedCultures = new[]
+	{
+		new CultureInfo("en"),
+		new CultureInfo("lv")
+	};
+
+	options.DefaultRequestCulture = new RequestCulture("ru");
+	options.SupportedCultures = supportedCultures;
+	options.SupportedUICultures = supportedCultures;
+});
+
+
 var app = builder.Build();
 
 //
@@ -129,20 +146,8 @@ else
     //
     app.UseHsts();
 }
-
-var supportedCultures = new[]
-{
-	new CultureInfo("en"),
-	new CultureInfo("lv")
-};
-app.UseRequestLocalization(new RequestLocalizationOptions
-{
-	DefaultRequestCulture = new RequestCulture("lv"),
-	SupportedCultures = supportedCultures,
-	SupportedUICultures = supportedCultures
-});
-
 app.UseHttpsRedirection();
+app.UseRequestLocalization();
 app.UseStaticFiles();
 
 app.UseRouting();
