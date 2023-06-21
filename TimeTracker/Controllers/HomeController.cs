@@ -94,12 +94,26 @@ namespace TimeTracker.Controllers
 			});
 		}
 
+		[HttpGet]
+		public IActionResult Create(string date, string week)
+		{
+			var parsedDate = DateTime.ParseExact(
+				date,
+				Common.Constants.DateTimeFormatForWeeks,
+				CultureInfo.InvariantCulture);
+			var parsedWeek = DateTime.ParseExact(
+				week,
+				Common.Constants.DateTimeFormatForWeeks,
+				CultureInfo.InvariantCulture);
+			return PartialView("Create", new TimeEntryFormViewModel(parsedDate, parsedWeek));
+		}
+
 		[HttpPost]
-		public async Task<IActionResult> CreateTimeEntry(TimeEntryFormViewModel? model)
+		public async Task<IActionResult> Create(TimeEntryFormViewModel model)
 		{
 			if (!ModelState.IsValid)
 			{
-				return BadRequest("CreateTimeEntry: The time entry creation form failed to pass validation!");
+				return BadRequest("The time entry creation form failed to pass validation!");
 			}
 
 			var selectedUserId = await EnsureSelectedUserId(model.UserId);
@@ -119,10 +133,56 @@ namespace TimeTracker.Controllers
 			return RedirectToAction("Index");
 		}
 
-		[HttpPost]
-		public async Task<IActionResult> Delete(int id)
+		[HttpGet]
+		public IActionResult Delete(int id)
 		{
-			_timeEntryService.Delete(_timeEntryService.FindById(id));
+			var timeEntry = _timeEntryService.FindById(id);
+			var model = new TimeEntryViewModel
+			{
+				Id = timeEntry.Id,
+				Comment = timeEntry.Comment
+			};
+			return PartialView("Delete", model);
+		}
+
+		[HttpPost]
+		[ActionName("Delete")]
+		public IActionResult DeletePost(int id)
+		{
+			var timeEntry = _timeEntryService.FindById(id);
+			_timeEntryService.Delete(timeEntry);
+			return RedirectToAction("Index");
+		}
+
+		[HttpGet]
+		public IActionResult Edit(int id)
+		{
+			var timeEntry = _timeEntryService.FindById(id);
+
+			var model = new TimeEntryViewModel(
+				timeEntry.Id,
+				timeEntry.Comment,
+				timeEntry.HoursSpent,
+				timeEntry.MinutesSpent);
+
+			return PartialView("Edit", model);
+		}
+
+		[HttpPost]
+		public IActionResult Edit(TimeEntryViewModel model)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest("The time entry update form failed to pass validation!");
+			}
+
+			var timeEntryToEdit = _timeEntryService.FindById(model.Id);
+
+			timeEntryToEdit.Comment = model.Comment;
+			timeEntryToEdit.HoursSpent = model.HoursSpent;
+			timeEntryToEdit.MinutesSpent = model.MinutesSpent;
+
+			_timeEntryService.Update(timeEntryToEdit);
 
 			return RedirectToAction("Index");
 		}

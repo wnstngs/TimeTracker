@@ -55,283 +55,308 @@
 
 <div class="row">
 	<div class="col-sm">
-		@if (Model.Week != Model.CurrentWeek || Model.IsWeekClosed)
+		@if (Model.Week != Model.CurrentWeek)
 		{
-			<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
-			        data-bs-target="#createTimeEntryModal"
-			        data-bs-date="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
-			        data-bs-week="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
-			        disabled>
+			<a href="@Url.Action("Create", "Home", new { week = Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks), date = Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks) })"
+			   class="btn btn-outline-primary w-100 disabled"
+			   data-bs-toggle="modal" data-bs-target="#modal" aria-disabled="true">
 				<span class="bi bi-plus-lg"></span>
-				&nbsp;@Model.Week.DayOfWeek (@Model.Week.Day)
-			</button>
+				&nbsp;@Model.Week.DayOfWeek&nbsp;@Model.Week.Day
+			</a>
 		}
 		else
 		{
-			<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
-			        data-bs-target="#createTimeEntryModal"
-			        data-bs-date="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
-			        data-bs-week="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)">
+			<a href="@Url.Action("Create", "Home", new { week = Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks), date = Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks) })"
+			   class="btn btn-outline-primary w-100 btn-modal"
+			   data-bs-toggle="modal" data-bs-target="#modal">
 				<span class="bi bi-plus-lg"></span>
-				&nbsp;@Model.Week.DayOfWeek (@Model.Week.Day)
-			</button>
+				&nbsp;@Model.Week.DayOfWeek&nbsp;@Model.Week.Day
+			</a>
 		}
 	</div>
 	<div class="col-sm">
-		@if (Model.Week != Model.CurrentWeek || Model.IsWeekClosed)
+		@if (Model.Week != Model.CurrentWeek)
 		{
-			<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
-			        data-bs-target="#createTimeEntryModal"
-			        data-bs-date="@Model.Week.AddDays(1).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
-			        data-bs-week="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
-			        disabled>
+			<a href="@Url.Action("Create", "Home", new { week = Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks), date = Model.Week.AddDays(1).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks) })"
+			   class="btn btn-outline-primary w-100 disabled"
+			   data-bs-toggle="modal" data-bs-target="#modal" aria-disabled="true">
 				<span class="bi bi-plus-lg"></span>
-				&nbsp;@Model.Week.AddDays(1).DayOfWeek (@Model.Week.AddDays(1).Day)
-			</button>
+				&nbsp;@Model.Week.AddDays(1).DayOfWeek&nbsp;@Model.Week.AddDays(1).Day
+			</a>
 		}
 		else
 		{
-			<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
-			        data-bs-target="#createTimeEntryModal"
-			        data-bs-date="@Model.Week.AddDays(1).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
-			        data-bs-week="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)">
+			<a href="@Url.Action("Create", "Home", new { week = Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks), date = Model.Week.AddDays(1).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks) })"
+			   class="btn btn-outline-primary w-100 btn-modal"
+			   data-bs-toggle="modal" data-bs-target="#modal">
 				<span class="bi bi-plus-lg"></span>
-				&nbsp;@Model.Week.AddDays(1).DayOfWeek (@Model.Week.AddDays(1).Day)
-			</button>
+				&nbsp;@Model.Week.AddDays(1).DayOfWeek&nbsp;@Model.Week.AddDays(1).Day
+			</a>
 		}
 	</div>
 	<div class="col-sm">
-		@if (Model.Week != Model.CurrentWeek || Model.IsWeekClosed)
+		@if (Model.Week != Model.CurrentWeek)
 		{
-			<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
-					data-bs-target="#createTimeEntryModal"
-					data-bs-date="@Model.Week.AddDays(2).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
-					data-bs-week="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
-					disabled>
+			<a href="@Url.Action("Create", "Home", new { week = Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks), date = Model.Week.AddDays(2).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks) })"
+			   class="btn btn-outline-primary w-100 disabled"
+			   data-bs-toggle="modal" data-bs-target="#modal" aria-disabled="true">
 				<span class="bi bi-plus-lg"></span>
-				&nbsp;@Model.Week.AddDays(2).DayOfWeek (@Model.Week.AddDays(2).Day)
-			</button>
+				&nbsp;@Model.Week.AddDays(2).DayOfWeek&nbsp;@Model.Week.AddDays(2).Day
+			</a>
 		}
 		else
 		{
-			<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
-					data-bs-target="#createTimeEntryModal"
-					data-bs-date="@Model.Week.AddDays(2).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
-					data-bs-week="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)">
+			<a href="@Url.Action("Create", "Home", new { week = Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks), date = Model.Week.AddDays(2).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks) })"
+			   class="btn btn-outline-primary w-100 btn-modal"
+			   data-bs-toggle="modal" data-bs-target="#modal">
 				<span class="bi bi-plus-lg"></span>
-				&nbsp;@Model.Week.AddDays(2).DayOfWeek (@Model.Week.AddDays(2).Day)
-			</button>
+				&nbsp;@Model.Week.AddDays(2).DayOfWeek&nbsp;@Model.Week.AddDays(2).Day
+			</a>
 		}
 	</div>
 	<div class="col-sm">
-		@if (Model.Week != Model.CurrentWeek || Model.IsWeekClosed)
+		@if (Model.Week != Model.CurrentWeek)
 		{
-			<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
-					data-bs-target="#createTimeEntryModal"
-					data-bs-date="@Model.Week.AddDays(3).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
-					data-bs-week="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
-					disabled>
+			<a href="@Url.Action("Create", "Home", new { week = Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks), date = Model.Week.AddDays(3).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks) })"
+			   class="btn btn-outline-primary w-100 disabled"
+			   data-bs-toggle="modal" data-bs-target="#modal" aria-disabled="true">
 				<span class="bi bi-plus-lg"></span>
-				&nbsp;@Model.Week.AddDays(3).DayOfWeek (@Model.Week.AddDays(3).Day)
-			</button>
+				&nbsp;@Model.Week.AddDays(3).DayOfWeek&nbsp;@Model.Week.AddDays(3).Day
+			</a>
 		}
 		else
 		{
-			<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
-					data-bs-target="#createTimeEntryModal"
-					data-bs-date="@Model.Week.AddDays(3).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
-					data-bs-week="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)">
+			<a href="@Url.Action("Create", "Home", new { week = Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks), date = Model.Week.AddDays(3).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks) })"
+			   class="btn btn-outline-primary w-100 btn-modal"
+			   data-bs-toggle="modal" data-bs-target="#modal">
 				<span class="bi bi-plus-lg"></span>
-				&nbsp;@Model.Week.AddDays(3).DayOfWeek (@Model.Week.AddDays(3).Day)
-			</button>
+				&nbsp;@Model.Week.AddDays(3).DayOfWeek&nbsp;@Model.Week.AddDays(3).Day
+			</a>
 		}
 	</div>
 	<div class="col-sm">
-		@if (Model.Week != Model.CurrentWeek || Model.IsWeekClosed)
+		@if (Model.Week != Model.CurrentWeek)
 		{
-			<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
-					data-bs-target="#createTimeEntryModal"
-					data-bs-date="@Model.Week.AddDays(4).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
-					data-bs-week="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
-					disabled>
+			<a href="@Url.Action("Create", "Home", new { week = Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks), date = Model.Week.AddDays(4).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks) })"
+			   class="btn btn-outline-primary w-100 disabled"
+			   data-bs-toggle="modal" data-bs-target="#modal" aria-disabled="true">
 				<span class="bi bi-plus-lg"></span>
-				&nbsp;@Model.Week.AddDays(4).DayOfWeek (@Model.Week.AddDays(4).Day)
-			</button>
+				&nbsp;@Model.Week.AddDays(4).DayOfWeek&nbsp;@Model.Week.AddDays(4).Day
+			</a>
 		}
 		else
 		{
-			<button class="btn btn-outline-primary w-100" data-bs-toggle="modal"
-					data-bs-target="#createTimeEntryModal"
-					data-bs-date="@Model.Week.AddDays(4).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)"
-					data-bs-week="@Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks)">
+			<a href="@Url.Action("Create", "Home", new { week = Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks), date = Model.Week.AddDays(4).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks) })"
+			   class="btn btn-outline-primary w-100 btn-modal"
+			   data-bs-toggle="modal" data-bs-target="#modal">
 				<span class="bi bi-plus-lg"></span>
-				&nbsp;@Model.Week.AddDays(4).DayOfWeek (@Model.Week.AddDays(4).Day)
-			</button>
+				&nbsp;@Model.Week.AddDays(4).DayOfWeek&nbsp;@Model.Week.AddDays(4).Day
+			</a>
 		}
 	</div>
 </div>
 <div class="row">
 	<div class="col-sm">
 		<ul class="list-unstyled">
-			@foreach (var timeEntry in Model.CurrentWeekEntries)
+			@foreach (var timeEntry in Model.CurrentWeekEntries
+				.Where(timeEntry => timeEntry.Date == Model.Week))
 			{
-				@if (timeEntry.Date == Model.Week)
-				{
-					<li>
-						<div class="card">
-							<div class="card-header">
-								<p class="card-text">
-									@timeEntry.HoursSpent h @timeEntry.MinutesSpent min
-								</p>
-							</div>
-							<div class="card-body">
-								<p class="card-text">
-									@timeEntry.Comment
-								</p>
-								@if (Model.Week == Model.CurrentWeek && !Model.IsWeekClosed)
-								{
-									<a href="#" class="btn btn-primary btn-sm">Edit</a>
-									<a class="btn btn-danger btn-sm" data-bs-toggle="modal"
-									   data-bs-target="#deleteTimeEntryModal" data-bs-id="@timeEntry.Id">
-										Delete
-									</a>
-								}
-							</div>
+				<li>
+					<div class="card">
+						<div class="card-header">
+							<p class="card-text">
+								@timeEntry.HoursSpent h @timeEntry.MinutesSpent min
+							</p>
 						</div>
-					</li>
-				}
+						<div class="card-body">
+							<p class="card-text">
+								@timeEntry.Comment
+							</p>
+							@if (Model.Week == Model.CurrentWeek && !Model.IsWeekClosed)
+							{
+								<a href="@Url.Action("Edit", "Home", new { id = timeEntry.Id })"
+								   class="btn btn-primary btn-sm btn-modal" data-bs-toggle="modal"
+								   data-bs-target="#modal">
+									Edit
+								</a>
+								<a href="@Url.Action("Delete", "Home", new { id = timeEntry.Id })"
+								   class="btn btn-danger btn-sm btn-modal" data-bs-toggle="modal"
+								   data-bs-target="#modal">
+									Delete
+								</a>
+							}
+						</div>
+					</div>
+				</li>
 			}
 		</ul>
 	</div>
 	<div class="col-sm">
 		<ul class="list-unstyled">
-			@foreach (var timeEntry in Model.CurrentWeekEntries)
+			@foreach (var timeEntry in Model.CurrentWeekEntries
+				.Where(timeEntry => timeEntry.Date == Model.Week.AddDays(1)))
 			{
-				@if (timeEntry.Date == Model.Week.AddDays(1))
-				{
-					<li>
-						<div class="card">
-							<div class="card-header">
-								<p class="card-text">
-									@timeEntry.HoursSpent h @timeEntry.MinutesSpent min
-								</p>
-							</div>
-							<div class="card-body">
-								<p class="card-text">
-									@timeEntry.Comment
-								</p>
-								@if (Model.Week == Model.CurrentWeek && !Model.IsWeekClosed)
-								{
-									<a href="#" class="btn btn-primary btn-sm">Edit</a>
-									<a class="btn btn-danger btn-sm" data-bs-toggle="modal"
-									   data-bs-target="#deleteTimeEntryModal" data-bs-id="@timeEntry.Id">
-										Delete
-									</a>
-								}
-							</div>
+				<li>
+					<div class="card">
+						<div class="card-header">
+							<p class="card-text">
+								@timeEntry.HoursSpent h @timeEntry.MinutesSpent min
+							</p>
 						</div>
-					</li>
-				}
+						<div class="card-body">
+							<p class="card-text">
+								@timeEntry.Comment
+							</p>
+							@if (Model.Week == Model.CurrentWeek && !Model.IsWeekClosed)
+							{
+								<a href="@Url.Action("Edit", "Home", new { id = timeEntry.Id })"
+								   class="btn btn-primary btn-sm btn-modal" data-bs-toggle="modal"
+								   data-bs-target="#modal">
+									Edit
+								</a>
+								<a href="@Url.Action("Delete", "Home", new { id = timeEntry.Id })"
+								   class="btn btn-danger btn-sm btn-modal" data-bs-toggle="modal"
+								   data-bs-target="#modal">
+									Delete
+								</a>
+							}
+						</div>
+					</div>
+				</li>
 			}
 		</ul>
 	</div>
 	<div class="col-sm">
 		<ul class="list-unstyled">
-			@foreach (var timeEntry in Model.CurrentWeekEntries)
+			@foreach (var timeEntry in Model.CurrentWeekEntries
+				.Where(timeEntry => timeEntry.Date == Model.Week.AddDays(2)))
 			{
-				@if (timeEntry.Date == Model.Week.AddDays(2))
-				{
-					<li>
-						<div class="card">
-							<div class="card-header">
-								<p class="card-text">
-									@timeEntry.HoursSpent h @timeEntry.MinutesSpent min
-								</p>
-							</div>
-							<div class="card-body">
-								<p class="card-text">
-									@timeEntry.Comment
-								</p>
-								@if (Model.Week == Model.CurrentWeek && !Model.IsWeekClosed)
-								{
-									<a href="#" class="btn btn-primary btn-sm">Edit</a>
-									<a class="btn btn-danger btn-sm" data-bs-toggle="modal"
-									   data-bs-target="#deleteTimeEntryModal" data-bs-id="@timeEntry.Id">
-										Delete
-									</a>
-								}
-							</div>
+				<li>
+					<div class="card">
+						<div class="card-header">
+							<p class="card-text">
+								@timeEntry.HoursSpent h @timeEntry.MinutesSpent min
+							</p>
 						</div>
-					</li>
-				}
+						<div class="card-body">
+							<p class="card-text">
+								@timeEntry.Comment
+							</p>
+							@if (Model.Week == Model.CurrentWeek && !Model.IsWeekClosed)
+							{
+								<a href="@Url.Action("Edit", "Home", new { id = timeEntry.Id })"
+								   class="btn btn-primary btn-sm btn-modal" data-bs-toggle="modal"
+								   data-bs-target="#modal">
+									Edit
+								</a>
+								<a href="@Url.Action("Delete", "Home", new { id = timeEntry.Id })"
+								   class="btn btn-danger btn-sm btn-modal" data-bs-toggle="modal"
+								   data-bs-target="#modal">
+									Delete
+								</a>
+							}
+						</div>
+					</div>
+				</li>
 			}
 		</ul>
 	</div>
 	<div class="col-sm">
 		<ul class="list-unstyled">
-			@foreach (var timeEntry in Model.CurrentWeekEntries)
+			@foreach (var timeEntry in Model.CurrentWeekEntries
+				.Where(timeEntry => timeEntry.Date == Model.Week.AddDays(3)))
 			{
-				@if (timeEntry.Date == Model.Week.AddDays(3))
-				{
-					<li>
-						<div class="card">
-							<div class="card-header">
-								<p class="card-text">
-									@timeEntry.HoursSpent h @timeEntry.MinutesSpent min
-								</p>
-							</div>
-							<div class="card-body">
-								<p class="card-text">
-									@timeEntry.Comment
-								</p>
-								@if (Model.Week == Model.CurrentWeek && !Model.IsWeekClosed)
-								{
-									<a href="#" class="btn btn-primary btn-sm">Edit</a>
-									<a class="btn btn-danger btn-sm" data-bs-toggle="modal"
-									   data-bs-target="#deleteTimeEntryModal" data-bs-id="@timeEntry.Id">
-										Delete
-									</a>
-								}
-							</div>
+				<li>
+					<div class="card">
+						<div class="card-header">
+							<p class="card-text">
+								@timeEntry.HoursSpent h @timeEntry.MinutesSpent min
+							</p>
 						</div>
-					</li>
-				}
+						<div class="card-body">
+							<p class="card-text">
+								@timeEntry.Comment
+							</p>
+							@if (Model.Week == Model.CurrentWeek && !Model.IsWeekClosed)
+							{
+								<a href="@Url.Action("Edit", "Home", new { id = timeEntry.Id })"
+								   class="btn btn-primary btn-sm btn-modal" data-bs-toggle="modal"
+								   data-bs-target="#modal">
+									Edit
+								</a>
+								<a href="@Url.Action("Delete", "Home", new { id = timeEntry.Id })"
+								   class="btn btn-danger btn-sm btn-modal" data-bs-toggle="modal"
+								   data-bs-target="#modal">
+									Delete
+								</a>
+							}
+						</div>
+					</div>
+				</li>
 			}
 		</ul>
 	</div>
 	<div class="col-sm">
 		<ul class="list-unstyled">
-			@foreach (var timeEntry in Model.CurrentWeekEntries)
+			@foreach (var timeEntry in Model.CurrentWeekEntries
+				.Where(timeEntry => timeEntry.Date == Model.Week.AddDays(4)))
 			{
-				@if (timeEntry.Date == Model.Week.AddDays(4))
-				{
-					<li>
-						<div class="card">
-							<div class="card-header">
-								<p class="card-text">
-									@timeEntry.HoursSpent h @timeEntry.MinutesSpent min
-								</p>
-							</div>
-							<div class="card-body">
-								<p class="card-text">
-									@timeEntry.Comment
-								</p>
-								@if (Model.Week == Model.CurrentWeek && !Model.IsWeekClosed)
-								{
-									<a href="#" class="btn btn-primary btn-sm">Edit</a>
-									<a class="btn btn-danger btn-sm" data-bs-toggle="modal"
-									   data-bs-target="#deleteTimeEntryModal" data-bs-id="@timeEntry.Id">
-										Delete
-									</a>
-								}
-							</div>
+				<li>
+					<div class="card">
+						<div class="card-header">
+							<p class="card-text">
+								@timeEntry.HoursSpent h @timeEntry.MinutesSpent min
+							</p>
 						</div>
-					</li>
-				}
+						<div class="card-body">
+							<p class="card-text">
+								@timeEntry.Comment
+							</p>
+							@if (Model.Week == Model.CurrentWeek && !Model.IsWeekClosed)
+							{
+								<a href="@Url.Action("Edit", "Home", new { id = timeEntry.Id })"
+								   class="btn btn-primary btn-sm btn-modal" data-bs-toggle="modal"
+								   data-bs-target="#modal">
+									Edit
+								</a>
+								<a href="@Url.Action("Delete", "Home", new { id = timeEntry.Id })"
+								   class="btn btn-danger btn-sm btn-modal" data-bs-toggle="modal"
+								   data-bs-target="#modal">
+									Delete
+								</a>
+							}
+						</div>
+					</div>
+				</li>
 			}
 		</ul>
 	</div>
 </div>
 
-@await Html.PartialAsync("Create", new TimeEntryFormViewModel())
-@await Html.PartialAsync("Delete")
+<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			Loading...
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+
+	<script>
+		$('main').on('click', '.btn-modal', (event) => {
+			event.preventDefault();
+		
+			const url = event.target.getAttribute('href');
+			$('.modal-content').load(url);
+		});
+
+		const modal = document.getElementById('modal');
+		modal.addEventListener('hide.bs.modal', function () {
+			$('.modal-content').html(`Loading...`);
+		});
+	</script>
+}

@@ -4,6 +4,17 @@ namespace TimeTracker.Models;
 
 public class TimeEntryFormViewModel
 {
+
+	public TimeEntryFormViewModel()
+	{
+	}
+
+	public TimeEntryFormViewModel(DateTime date, DateTime week)
+	{
+		Date = date;
+		Week = week;
+	}
+
 	public int Id { get; set; }
 
 	public int? UserId { get; set; }
@@ -22,8 +33,4 @@ public class TimeEntryFormViewModel
 	public DateTime Date { get; set; }
 
 	public DateTime Week { get; set; }
-
-	public TimeEntryFormViewModel()
-	{
-	}
 }

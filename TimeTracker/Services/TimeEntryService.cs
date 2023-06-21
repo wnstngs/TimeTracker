@@ -8,7 +8,7 @@ namespace TimeTracker.Services;
 
 public class TimeEntryService : BaseService<TimeEntry>, ITimeEntryService
 {
-	public TimeEntryService(ApplicationDbContext dataContext) : base(dataContext)
+	public TimeEntryService(IDataContext dataContext) : base(dataContext)
 	{
 	}
 

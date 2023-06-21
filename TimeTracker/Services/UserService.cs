@@ -8,7 +8,7 @@ namespace TimeTracker.Services;
 
 public class UserService : BaseService<ApplicationUser>, IUserService
 {
-	public UserService(ApplicationDbContext dataContext) : base(dataContext)
+	public UserService(IDataContext dataContext) : base(dataContext)
 	{
 	}
 
@@ -22,10 +22,16 @@ public class UserService : BaseService<ApplicationUser>, IUserService
 		var existingUser = dbSet.AsNoTracking().IgnoreQueryFilters().FirstOrDefault(u => u.UserName == email);
 		if (existingUser == null)
 		{
+			//
+			// Doesn't exist.
+			//
 			return false;
 		}
 		else
 		{
+			//
+			// Exists user with that Email and UserName.
+			//
 			return true;
 		}
 	}

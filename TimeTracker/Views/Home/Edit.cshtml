@@ -1,37 +1,37 @@
-﻿@model TimeEntryFormViewModel
+﻿@model TimeEntryViewModel
 
 <div class="modal-header">
-	<h5 class="modal-title" id="createTimeEntryModalLabel">New time entry</h5>
+	<h5 class="modal-title" id="edittimeEntryModalLabel">Edit time entry</h5>
 	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
-<form action="@Url.Action("Create", "Home")" id="timeEntryForm" method="post">
+<form action="@Url.Action("Edit", "Home")" id="timeEntryForm" method="post">
 	<div class="modal-body">
 		<input type="hidden" name="date" value="@Model.Date" />
 		<input type="hidden" name="week" value="@Model.Week" />
 		<div class="form-floating mb-3">
-			<input asp-for="Comment" class="form-control" autocomplete="username" aria-required="true" placeholder="Comment"/>
+			<input asp-for="Comment" class="form-control" autocomplete="username" aria-required="true" placeholder="Comment" />
 			<label asp-for="Comment">Comment</label>
 			<span asp-validation-for="Comment" class="text-danger"></span>
 		</div>
 		<div class="form-floating mb-3">
 			<input asp-for="HoursSpent" class="form-control" aria-required="true"
-			       placeholder=""/>
+				   placeholder="" />
 			<label asp-for="HoursSpent">Hours spent</label>
 			<span asp-validation-for="HoursSpent" class="text-danger"></span>
 		</div>
 		<div class="form-floating mb-3">
 			<input asp-for="MinutesSpent" class="form-control" aria-required="true"
-			       placeholder=""/>
+				   placeholder="" />
 			<label asp-for="MinutesSpent">Minutes spent</label>
 			<span asp-validation-for="MinutesSpent" class="text-danger"></span>
 		</div>
 	</div>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-		<button type="submit" class="btn btn-primary">Create</button>
+		<button type="submit" class="btn btn-primary">Update</button>
 	</div>
 </form>
 
 <script>
-	$.validator.unobtrusive.parse($('#timeEntryForm'));
+	$.validator.unobtrusive.parse($('#userForm'));
 </script>

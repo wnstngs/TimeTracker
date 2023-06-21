@@ -5,7 +5,7 @@ using TimeTracker.Models;
 
 namespace TimeTracker.Data;
 
-public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, int>
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, int>, IDataContext
 {
 	public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
 		: base(options)

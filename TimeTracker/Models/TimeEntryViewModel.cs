@@ -4,6 +4,23 @@ namespace TimeTracker.Models;
 
 public class TimeEntryViewModel
 {
+	public TimeEntryViewModel()
+	{
+	}
+
+	public TimeEntryViewModel(int id)
+	{
+		Id = id;
+	}
+
+	public TimeEntryViewModel(int id, string? comment, int hoursSpent, int minutesSpent)
+	{
+		Id = id;
+		Comment = comment;
+		HoursSpent = hoursSpent;
+		MinutesSpent = minutesSpent;
+	}
+
 	public int Id { get; set; }
 
 	public int UserId { get; set; }
@@ -17,8 +34,4 @@ public class TimeEntryViewModel
 	public DateTime Date { get; set; }
 
 	public DateTime Week { get; set; }
-
-	public TimeEntryViewModel()
-	{
-	}
 }

@@ -6,10 +6,10 @@ namespace TimeTracker.Services.Base;
 
 public abstract class BaseService<T> where T : class
 {
-	protected ApplicationDbContext dataContext;
+	protected IDataContext dataContext;
 	protected readonly DbSet<T> dbSet;
 
-	protected BaseService(ApplicationDbContext dataContext)
+	protected BaseService(IDataContext dataContext)
 	{
 		this.dataContext = dataContext;
 		dbSet = dataContext.Set<T>();
@@ -62,13 +62,14 @@ public abstract class BaseService<T> where T : class
 
 	public virtual T FindById(int id, bool asNoTracking = false)
 	{
-		var entity = dbSet.Find(id) ?? throw new ArgumentException(
-				$"The entity with id {id} of type {typeof(T)} is not found"
-			);
+		var entity = dbSet.Find(id);
+
+		if (entity == null)
+			throw new ArgumentException($"The entity with id {id} of type {typeof(T)} is not found");
+
 		if (asNoTracking)
-		{
 			dataContext.Entry(entity).State = EntityState.Detached;
-		}
+
 		return entity;
 	}
 

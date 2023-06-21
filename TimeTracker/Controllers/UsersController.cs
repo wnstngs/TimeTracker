@@ -136,10 +136,7 @@ namespace TimeTracker.Controllers
         public IActionResult Delete(int id)
         {
 	        var user = _userService.FindById(id);
-
-	        var model = new UserFormViewModel(user.Id, user.Email!);
-
-			return PartialView("Delete", model);
+	        return PartialView("Delete", new UserFormViewModel(user.Id, user.Email!));
         }
 
 		[HttpPost]

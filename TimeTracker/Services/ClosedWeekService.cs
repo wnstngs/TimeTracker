@@ -7,7 +7,7 @@ namespace TimeTracker.Services;
 
 public class ClosedWeekService : BaseService<ClosedWeek>, IClosedWeekService
 {
-	public ClosedWeekService(ApplicationDbContext dataContext) : base(dataContext)
+	public ClosedWeekService(IDataContext dataContext) : base(dataContext)
 	{
 	}
 
