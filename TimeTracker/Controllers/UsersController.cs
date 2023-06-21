@@ -79,7 +79,7 @@ namespace TimeTracker.Controllers
 	        await _userManager.CreateAsync(newUser, user.Password);
 	        await _userManager.AddToRoleAsync(newUser, Roles.User);
 
-	        return Ok("User created successfully.");
+	        return Ok("User has been created.");
         }
 
 
@@ -104,10 +104,35 @@ namespace TimeTracker.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(UserFormViewModel model)
+        public async Task<IActionResult> Edit(UserFormViewModel model)
         {
-	        return RedirectToAction("Index");
-        }
+	        if (!ModelState.IsValid)
+	        {
+		        return BadRequest("The user update form failed to pass validation!");
+	        }
+
+	        var userToEdit = await _userManager.Users.FirstAsync(u => u.Id == model.Id);
+	        
+			userToEdit.Email = model.Email;
+			userToEdit.UserName = model.Email;
+
+			var result = _userManager.UpdateAsync(userToEdit).Result;
+
+			if (!result.Succeeded)
+			{
+				return BadRequest("User update failed.");
+			}
+
+			var resetToken = _userManager.GeneratePasswordResetTokenAsync(userToEdit).Result;
+			result = _userManager.ResetPasswordAsync(userToEdit, resetToken, model.Password).Result;
+			
+			if (result.Succeeded)
+			{
+				return Ok("User has been updated");
+			}
+
+			return BadRequest("User update failed.");
+		}
 
 		[HttpGet]
         public async Task<IActionResult> Delete(int id)
@@ -147,7 +172,7 @@ namespace TimeTracker.Controllers
 
             await _userManager.DeleteAsync(user);
 
-            return Ok("User deleted successfully.");
+            return Ok("User has been deleted.");
 		}
     }
 }
