@@ -104,9 +104,15 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 		new CultureInfo("lv")
 	};
 
-	options.DefaultRequestCulture = new RequestCulture("ru");
+	options.ApplyCurrentCultureToResponseHeaders = true;
+	options.DefaultRequestCulture = new RequestCulture("en");
 	options.SupportedCultures = supportedCultures;
 	options.SupportedUICultures = supportedCultures;
+	options.RequestCultureProviders = new List<IRequestCultureProvider>
+	{
+		new CookieRequestCultureProvider(),
+		new AcceptLanguageHeaderRequestCultureProvider()
+	};
 });
 
 
