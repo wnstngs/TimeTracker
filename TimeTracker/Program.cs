@@ -85,6 +85,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 //
 builder.Services.AddScoped<IClosedWeekService, ClosedWeekService>();
 builder.Services.AddScoped<ITimeEntryService, TimeEntryService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
