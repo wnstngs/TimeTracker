@@ -24,28 +24,12 @@ namespace TimeTracker.Controllers
 
         public IActionResult Index()
         {
-	        var users = _userManager.Users.Select(u => new UsersListViewModel
-	        {
-		        UserId = u.Id,
-		        UserName = u.UserName,
-		        UserEmail = u.Email,
-		        UserRoles = string.Join(",", _userManager.GetRolesAsync(u).Result.ToArray())
-	        });
-
-			return View(users);
+	        return View(GetUsersWithRoles());
         }
 
         public IActionResult IndexData()
         {
-	        var users = _userManager.Users.Select(u => new UsersListViewModel
-	        {
-		        UserId = u.Id,
-		        UserName = u.UserName,
-		        UserEmail = u.Email,
-		        UserRoles = string.Join(",", _userManager.GetRolesAsync(u).Result.ToArray())
-	        });
-
-	        return PartialView(users);
+	        return PartialView(GetUsersWithRoles());
         }
 
 		[HttpGet]
@@ -101,12 +85,13 @@ namespace TimeTracker.Controllers
 		        return BadRequest("The user update form failed to pass validation!");
 	        }
 
-	        if (_userService.UserExists(model.Email))
+	        var userToEdit = _userService.GetByIdForEdit(model.Id);
+
+			if (_userService.UserExists(model.Email) && 
+	            model.Email != userToEdit.Email)
 	        {
 		        return BadRequest("There is already a user with that UserName and Email.");
 			}
-
-	        var userToEdit = _userService.GetByIdForEdit(model.Id);
 
 			//
 			// UserName and Email are always the same for all application users.
@@ -148,6 +133,18 @@ namespace TimeTracker.Controllers
 	        await _userManager.DeleteAsync(user);
 
             return Ok("User has been deleted.");
+		}
+
+		private IQueryable<UsersListViewModel> GetUsersWithRoles()
+		{
+			var users = _userManager.Users.Select(u => new UsersListViewModel
+			{
+				UserId = u.Id,
+				UserName = u.UserName,
+				UserEmail = u.Email,
+				UserRoles = string.Join(",", _userManager.GetRolesAsync(u).Result.ToArray())
+			});
+			return users;
 		}
     }
 }
