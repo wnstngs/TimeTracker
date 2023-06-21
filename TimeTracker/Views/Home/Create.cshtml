@@ -4,14 +4,14 @@
 
 <div class="modal-header">
 	<h5 class="modal-title" id="createTimeEntryModalLabel">@Localizer["Title"]</h5>
-	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 </div>
 <form action="@Url.Action("Create", "Home")" id="timeEntryForm" method="post">
 	<div class="modal-body">
 		<input type="hidden" name="date" value="@Model.Date" />
 		<input type="hidden" name="week" value="@Model.Week" />
 		<div class="form-floating mb-3">
-			<input asp-for="Comment" class="form-control" autocomplete="username" aria-required="true" placeholder="Comment"/>
+			<input asp-for="Comment" class="form-control" autocomplete="username" placeholder="Comment"/>
 			<label asp-for="Comment">@Localizer["Comment"]</label>
 			<span asp-validation-for="Comment" class="text-danger"></span>
 		</div>

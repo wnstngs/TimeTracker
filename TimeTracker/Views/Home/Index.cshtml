@@ -61,7 +61,7 @@
 		{
 			<a href="@Url.Action("Create", "Home", new { week = Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks), date = Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks) })"
 			   class="btn btn-outline-primary w-100 disabled"
-			   data-bs-toggle="modal" data-bs-target="#modal" aria-disabled="true">
+			   data-bs-toggle="modal" data-bs-target="#modal">
 				<span class="bi bi-plus-lg"></span>
 				&nbsp;@Localizer["Monday"]&nbsp;@Model.Week.Day
 			</a>
@@ -81,7 +81,7 @@
 		{
 			<a href="@Url.Action("Create", "Home", new { week = Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks), date = Model.Week.AddDays(1).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks) })"
 			   class="btn btn-outline-primary w-100 disabled"
-			   data-bs-toggle="modal" data-bs-target="#modal" aria-disabled="true">
+			   data-bs-toggle="modal" data-bs-target="#modal">
 				<span class="bi bi-plus-lg"></span>
 				&nbsp;@Localizer["Tuesday"]&nbsp;@Model.Week.AddDays(1).Day
 			</a>
@@ -101,7 +101,7 @@
 		{
 			<a href="@Url.Action("Create", "Home", new { week = Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks), date = Model.Week.AddDays(2).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks) })"
 			   class="btn btn-outline-primary w-100 disabled"
-			   data-bs-toggle="modal" data-bs-target="#modal" aria-disabled="true">
+			   data-bs-toggle="modal" data-bs-target="#modal">
 				<span class="bi bi-plus-lg"></span>
 				&nbsp;@Localizer["Wednesday"]&nbsp;@Model.Week.AddDays(2).Day
 			</a>
@@ -121,7 +121,7 @@
 		{
 			<a href="@Url.Action("Create", "Home", new { week = Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks), date = Model.Week.AddDays(3).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks) })"
 			   class="btn btn-outline-primary w-100 disabled"
-			   data-bs-toggle="modal" data-bs-target="#modal" aria-disabled="true">
+			   data-bs-toggle="modal" data-bs-target="#modal">
 				<span class="bi bi-plus-lg"></span>
 				&nbsp;@Localizer["Thursday"]&nbsp;@Model.Week.AddDays(3).Day
 			</a>
@@ -141,7 +141,7 @@
 		{
 			<a href="@Url.Action("Create", "Home", new { week = Model.Week.ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks), date = Model.Week.AddDays(4).ToString(TimeTracker.Common.Constants.DateTimeFormatForWeeks) })"
 			   class="btn btn-outline-primary w-100 disabled"
-			   data-bs-toggle="modal" data-bs-target="#modal" aria-disabled="true">
+			   data-bs-toggle="modal" data-bs-target="#modal">
 				<span class="bi bi-plus-lg"></span>
 				&nbsp;@Localizer["Friday"]&nbsp;@Model.Week.AddDays(4).Day
 			</a>
@@ -335,7 +335,7 @@
 	</div>
 </div>
 
-<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+<div class="modal fade" id="modal" tabindex="-1">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			Loading...
