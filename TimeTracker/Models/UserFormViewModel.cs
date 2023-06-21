@@ -14,15 +14,15 @@ namespace TimeTracker.Models
 
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "EmailRequired")]
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
-        public string Password { get; set; }
+		[Required(ErrorMessage = "PasswordRequired")]
+		public string Password { get; set; }
 
-        [Required]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
+        [Required(ErrorMessage = "ConfirmPasswordRequired")]
+        [Compare("Password", ErrorMessage = "PasswordsDoNotMatch")]
+		public string ConfirmPassword { get; set; }
     }
 }

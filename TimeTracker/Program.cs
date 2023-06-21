@@ -29,6 +29,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(
 //
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 builder.Services.AddControllersWithViews()
+	.AddDataAnnotationsLocalization()
 	.AddViewLocalization();
 
 //

@@ -19,15 +19,15 @@ public class TimeEntryFormViewModel
 
 	public int? UserId { get; set; }
 
-	[Required]
-	[Range(0, 23)]
+	[Required(ErrorMessage = "HoursSpentRequired")]
+	[Range(0, 23, ErrorMessage = "HoursSpentRange")]
 	public int HoursSpent { get; set; }
 
-	[Required]
-	[Range(0, 59)]
+	[Required(ErrorMessage = "MinutesSpentRequired")]
+	[Range(0, 59, ErrorMessage = "MinutesSpentRange")]
 	public int MinutesSpent { get; set; }
 
-	[Required]
+	[Required(ErrorMessage = "CommentRequired")]
 	public string? Comment { get; set; } = default!;
 
 	public DateTime Date { get; set; }
