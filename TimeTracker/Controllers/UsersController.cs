@@ -87,6 +87,10 @@ namespace TimeTracker.Controllers
 
 	        var userToEdit = _userService.GetByIdForEdit(model.Id);
 
+			//
+			// Ignore the name if it matches the current user name (cases where the
+			// user only changes the password without updating the name).
+			//
 			if (_userService.UserExists(model.Email) && 
 	            model.Email != userToEdit.Email)
 	        {
@@ -94,7 +98,7 @@ namespace TimeTracker.Controllers
 			}
 
 			//
-			// UserName and Email are always the same for all application users.
+			// The UserName and Email are always the same for all application users.
 			//
 			userToEdit.Email = model.Email;
 			userToEdit.UserName = model.Email;
@@ -103,14 +107,24 @@ namespace TimeTracker.Controllers
 
 			if (!result.Succeeded)
 			{
+				//
+				// The user update operation was not successful.
+				//
 				return BadRequest("User update failed.");
 			}
 
+			//
+			// Assuming the user update was successful, generate a password reset token for
+			// the updated user and reset the user's password.
+			//
 			var resetToken = _userManager.GeneratePasswordResetTokenAsync(userToEdit).Result;
 			result = _userManager.ResetPasswordAsync(userToEdit, resetToken, model.Password).Result;
 			
 			if (result.Succeeded)
 			{
+				//
+				// Return Ok if the password reset operation was successful.
+				//
 				return Ok("User has been updated");
 			}
 
