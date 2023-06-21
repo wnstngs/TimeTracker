@@ -1,11 +1,13 @@
 ﻿@using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.Localization
 @model TimeEntriesListViewModel
 @inject IAuthorizationService AuthorizationService
 @inject UserManager<ApplicationUser> UserManager
+@inject IViewLocalizer Localizer
 
 @{
-	ViewData["Title"] = "Time Tracker";
+	ViewData["Title"] = @Localizer["Title"];
 
 	var currentUser = await UserManager.GetUserAsync(User);
 	var isAdmin = currentUser != null
@@ -165,7 +167,7 @@
 					<div class="card">
 						<div class="card-header">
 							<p class="card-text">
-								@timeEntry.HoursSpent h @timeEntry.MinutesSpent min
+								@timeEntry.HoursSpent @Localizer["Hours"] @timeEntry.MinutesSpent @Localizer["Minutes"]
 							</p>
 						</div>
 						<div class="card-body">
@@ -177,12 +179,12 @@
 								<a href="@Url.Action("Edit", "Home", new { id = timeEntry.Id })"
 								   class="btn btn-primary btn-sm btn-modal" data-bs-toggle="modal"
 								   data-bs-target="#modal">
-									Edit
+									@Localizer["Edit"]
 								</a>
 								<a href="@Url.Action("Delete", "Home", new { id = timeEntry.Id })"
 								   class="btn btn-danger btn-sm btn-modal" data-bs-toggle="modal"
 								   data-bs-target="#modal">
-									Delete
+									@Localizer["Delete"]
 								</a>
 							}
 						</div>
@@ -200,7 +202,7 @@
 					<div class="card">
 						<div class="card-header">
 							<p class="card-text">
-								@timeEntry.HoursSpent h @timeEntry.MinutesSpent min
+								@timeEntry.HoursSpent @Localizer["Hours"] @timeEntry.MinutesSpent @Localizer["Minutes"]
 							</p>
 						</div>
 						<div class="card-body">
@@ -212,12 +214,12 @@
 								<a href="@Url.Action("Edit", "Home", new { id = timeEntry.Id })"
 								   class="btn btn-primary btn-sm btn-modal" data-bs-toggle="modal"
 								   data-bs-target="#modal">
-									Edit
+									@Localizer["Edit"]
 								</a>
 								<a href="@Url.Action("Delete", "Home", new { id = timeEntry.Id })"
 								   class="btn btn-danger btn-sm btn-modal" data-bs-toggle="modal"
 								   data-bs-target="#modal">
-									Delete
+									@Localizer["Delete"]
 								</a>
 							}
 						</div>
@@ -235,7 +237,7 @@
 					<div class="card">
 						<div class="card-header">
 							<p class="card-text">
-								@timeEntry.HoursSpent h @timeEntry.MinutesSpent min
+								@timeEntry.HoursSpent @Localizer["Hours"] @timeEntry.MinutesSpent @Localizer["Minutes"]
 							</p>
 						</div>
 						<div class="card-body">
@@ -247,12 +249,12 @@
 								<a href="@Url.Action("Edit", "Home", new { id = timeEntry.Id })"
 								   class="btn btn-primary btn-sm btn-modal" data-bs-toggle="modal"
 								   data-bs-target="#modal">
-									Edit
+									@Localizer["Edit"]
 								</a>
 								<a href="@Url.Action("Delete", "Home", new { id = timeEntry.Id })"
 								   class="btn btn-danger btn-sm btn-modal" data-bs-toggle="modal"
 								   data-bs-target="#modal">
-									Delete
+									@Localizer["Delete"]
 								</a>
 							}
 						</div>
@@ -270,7 +272,7 @@
 					<div class="card">
 						<div class="card-header">
 							<p class="card-text">
-								@timeEntry.HoursSpent h @timeEntry.MinutesSpent min
+								@timeEntry.HoursSpent @Localizer["Hours"] @timeEntry.MinutesSpent @Localizer["Minutes"]
 							</p>
 						</div>
 						<div class="card-body">
@@ -282,12 +284,12 @@
 								<a href="@Url.Action("Edit", "Home", new { id = timeEntry.Id })"
 								   class="btn btn-primary btn-sm btn-modal" data-bs-toggle="modal"
 								   data-bs-target="#modal">
-									Edit
+									@Localizer["Edit"]
 								</a>
 								<a href="@Url.Action("Delete", "Home", new { id = timeEntry.Id })"
 								   class="btn btn-danger btn-sm btn-modal" data-bs-toggle="modal"
 								   data-bs-target="#modal">
-									Delete
+									@Localizer["Delete"]
 								</a>
 							}
 						</div>
@@ -305,7 +307,7 @@
 					<div class="card">
 						<div class="card-header">
 							<p class="card-text">
-								@timeEntry.HoursSpent h @timeEntry.MinutesSpent min
+								@timeEntry.HoursSpent @Localizer["Hours"] @timeEntry.MinutesSpent @Localizer["Minutes"]
 							</p>
 						</div>
 						<div class="card-body">
@@ -317,12 +319,12 @@
 								<a href="@Url.Action("Edit", "Home", new { id = timeEntry.Id })"
 								   class="btn btn-primary btn-sm btn-modal" data-bs-toggle="modal"
 								   data-bs-target="#modal">
-									Edit
+									@Localizer["Edit"]
 								</a>
 								<a href="@Url.Action("Delete", "Home", new { id = timeEntry.Id })"
 								   class="btn btn-danger btn-sm btn-modal" data-bs-toggle="modal"
 								   data-bs-target="#modal">
-									Delete
+									@Localizer["Delete"]
 								</a>
 							}
 						</div>

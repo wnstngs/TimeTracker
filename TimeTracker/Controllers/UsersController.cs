@@ -88,8 +88,9 @@ namespace TimeTracker.Controllers
 	        var userToEdit = _userService.GetByIdForEdit(model.Id);
 
 			//
-			// Ignore the name if it matches the current user name (cases where the
-			// user only changes the password without updating the name).
+			// Check if that user already exists, but ignore the name if it matches the
+			// current user name (cases where the user only changes the password without
+			// updating the name).
 			//
 			if (_userService.UserExists(model.Email) && 
 	            model.Email != userToEdit.Email)

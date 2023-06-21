@@ -1,15 +1,17 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.Localization
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 
-@inject SignInManager<ApplicationUser> signInManager
-@inject UserManager<ApplicationUser> userManager
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject IViewLocalizer Localizer
 
-@if (signInManager.IsSignedIn(User))
+@if (SignInManager.IsSignedIn(User))
 {
-	var currentUser = await userManager.GetUserAsync(User);
+	var currentUser = await UserManager.GetUserAsync(User);
 
 	var isAdmin = currentUser != null
-	              && await userManager.IsInRoleAsync(
+	              && await UserManager.IsInRoleAsync(
 		              currentUser,
 		              Roles.Admin);
 
@@ -19,7 +21,7 @@
 			<a class="nav-link text-dark"
 			   asp-controller="Users"
 			   asp-action="Index">
-				Manage Users
+				@Localizer["ManageUsers"]
 			</a>
 		</li>
 	}

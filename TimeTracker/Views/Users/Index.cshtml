@@ -1,7 +1,9 @@
-﻿@model IEnumerable<UsersListViewModel>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model IEnumerable<UsersListViewModel>
+@inject IViewLocalizer Localizer
 
 @{
-	ViewData["Title"] = "Manage users";
+	ViewData["Title"] = Localizer["Title"];
 }
 
 <div class="d-flex justify-content-between">
@@ -9,7 +11,7 @@
 	<a href="@Url.Action("Create", "Users")" 
 	   class="btn btn-primary my-auto btn-modal"
 	   data-bs-toggle="modal" data-bs-target="#modal">
-		Create user
+		@Localizer["Create"]
 	</a>
 </div>
 

@@ -1,5 +1,7 @@
+using System.Globalization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using TimeTracker.Data;
 using TimeTracker.Models;
@@ -17,12 +19,17 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 	options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
-		options.SignIn.RequireConfirmedAccount = false
-	)
+builder.Services.AddDefaultIdentity<ApplicationUser>(
+		options => options.SignIn.RequireConfirmedAccount = false)
 	.AddRoles<ApplicationRole>()
 	.AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddControllersWithViews();
+
+//
+// Localization.
+//
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+builder.Services.AddControllersWithViews()
+	.AddViewLocalization();
 
 //
 // Require authenticated user.
@@ -41,9 +48,6 @@ builder.Services.Configure<IdentityOptions>(options =>
 {
     //
     // Password settings.
-    //!! Important requirements have been removed for testing,
-    //!! which are worth having included in the Release version.
-    //!! It may be worth disabling the requirements for the debug version only.
     //
     options.Password.RequireDigit = false;
     options.Password.RequireLowercase = false;
@@ -124,6 +128,18 @@ else
     //
     app.UseHsts();
 }
+
+var supportedCultures = new[]
+{
+	new CultureInfo("en"),
+	new CultureInfo("lv")
+};
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+	DefaultRequestCulture = new RequestCulture("lv"),
+	SupportedCultures = supportedCultures,
+	SupportedUICultures = supportedCultures
+});
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

@@ -1,20 +1,22 @@
-﻿@model UserFormViewModel
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model UserFormViewModel
+@inject IViewLocalizer Localizer
 
 <div class="modal-header">
-	<h5 class="modal-title" id="deleteUserModalLabel">Delete user</h5>
+	<h5 class="modal-title" id="deleteUserModalLabel">@Localizer["Title"]</h5>
 	<button type="button" class="btn-close" data-bs-dismiss="modal"
 	        aria-label="Close">
 	</button>
 </div>
 <form action="@Url.Action("Delete", "Users")" id="userForm" method="post">
 	<div class="modal-body">
-		<p>Do you want to delete user @Model.Email?</p>
+		<p>@Localizer["Body"] @Model.Email?</p>
 		<input type="hidden" name="id" value="@Model.Id" />
 	</div>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-			Cancel
+			@Localizer["Cancel"]
 		</button>
-		<button type="submit" class="btn btn-danger">Delete</button>
+		<button type="submit" class="btn btn-danger">@Localizer["Delete"]</button>
 	</div>
 </form>
